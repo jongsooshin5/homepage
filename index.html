@@ -1,384 +1,107 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jongsoo Shin — Researcher</title>
-<style>
-  :root{
-    --ink:#2b2620;
-    --muted:#75695c;
-    --accent:#7a1f2b;
-    --gold:#a98442;
-    --bg:#faf6ef;
-    --card:#fffdf9;
-    --line:#e3d9c6;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{
-    font-family:Georgia,"Noto Serif KR","Nanum Myeongjo",serif;
-    background:var(--bg);
-    color:var(--ink);
-    line-height:1.75;
-  }
-  a{color:var(--accent);text-decoration:none;}
-  .wrap{max-width:920px;margin:0 auto;padding:0 32px;}
-
-  header.hero{
-    background:var(--ink);
-    color:#f2ece0;
-    padding:72px 0 56px;
-    border-bottom:6px double var(--gold);
-  }
-  .hero-inner{display:flex;align-items:center;gap:44px;flex-wrap:wrap;}
-  .hero-photo{
-    flex:0 0 auto;
-    width:216px;height:216px;
-    border-radius:50%;
-    overflow:hidden;
-    border:3px solid var(--gold);
-    box-shadow:0 0 0 6px rgba(169,132,66,0.15);
-  }
-  .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center;filter:grayscale(12%);}
-  .hero-text .eyebrow{
-    font-size:12.5px;letter-spacing:.28em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:16px;font-style:italic;
-  }
-  .hero-text h1{
-    font-size:clamp(30px,4vw,42px);
-    font-weight:400;
-    letter-spacing:.01em;
-    margin-bottom:10px;
-  }
-  .hero-text .role{font-size:17px;color:#d8cdb8;margin-bottom:4px;font-style:italic;}
-  .hero-text .affil{font-size:14.5px;color:#b8ab92;margin-bottom:20px;}
-  .hero-links a{
-    font-size:13.5px;color:#f2ece0;
-    border-bottom:1px solid var(--gold);
-    margin-right:22px;
-    padding-bottom:2px;
-  }
-
-  nav.subnav{
-    background:var(--card);
-    border-bottom:1px solid var(--line);
-    position:sticky;top:0;z-index:10;
-  }
-  nav.subnav .wrap{display:flex;gap:0;justify-content:space-between;padding:0;flex-wrap:wrap;}
-  nav.subnav a{
-    flex:1 1 auto;text-align:center;
-    font-size:14.5px;letter-spacing:.06em;color:var(--muted);
-    padding:16px 18px;border-right:1px solid var(--line);
-  }
-  nav.subnav a:last-child{border-right:none;}
-  nav.subnav a:hover{color:var(--accent);}
-
-  section{padding:60px 0;}
-  section.alt{background:#f3ecdd;}
-  h2.section-title{
-    font-size:13px;
-    letter-spacing:.24em;
-    text-transform:uppercase;
-    color:var(--accent);
-    margin-bottom:6px;
-    font-weight:normal;
-  }
-  h2.section-title::after{
-    content:"";display:block;width:44px;height:2px;background:var(--gold);margin-top:12px;
-  }
-  .interest-list{display:flex;flex-direction:column;gap:0;margin-top:30px;}
-  .interest-row{
-    display:grid;grid-template-columns:40px minmax(0,1fr) 220px;gap:28px;
-    align-items:center;padding:26px 0;border-bottom:1px solid var(--line);
-  }
-  .interest-row:first-child{border-top:1px solid var(--line);}
-  .interest-row .num{font-size:22px;color:var(--gold);font-style:italic;flex:0 0 40px;}
-  .interest-row h3{font-size:17px;font-weight:normal;margin-bottom:6px;color:var(--ink);}
-  .interest-row p{font-size:14px;color:var(--muted);}
-  .interest-image{
-    width:220px;aspect-ratio:3/2;overflow:hidden;
-    border:1px solid var(--line);background:var(--card);
-    box-shadow:6px 6px 0 rgba(169,132,66,.16);
-  }
-  .interest-image img{width:100%;height:100%;display:block;object-fit:cover;}
-
-  .timeline{margin-top:26px;}
-  .t-item{
-    display:grid;grid-template-columns:150px 1fr;gap:24px;
-    padding:22px 0;border-top:1px solid var(--line);
-  }
-  .t-item:last-child{border-bottom:1px solid var(--line);}
-  .t-item .t-date{font-size:13.5px;color:var(--accent);font-style:italic;padding-top:2px;}
-  .t-item h3{font-size:16.5px;font-weight:normal;margin-bottom:6px;}
-  .t-item p{font-size:14px;color:var(--muted);}
-
-  .award-list{margin-top:24px;}
-  .award-list li{
-    list-style:none;
-    padding:16px 0;border-bottom:1px solid var(--line);
-    font-size:14.5px;
-    display:flex;justify-content:space-between;gap:20px;
-  }
-  .award-list li:first-child{border-top:1px solid var(--line);}
-  .award-list .yr{color:var(--gold);font-style:italic;white-space:nowrap;}
-
-  .pub-list{margin-top:26px;display:flex;flex-direction:column;gap:0;}
-  .pub-item{
-    padding:20px 0;border-bottom:1px solid var(--line);font-size:14.5px;
-  }
-  .pub-item:first-child{border-top:1px solid var(--line);}
-  .pub-item .pub-year{color:var(--accent);font-weight:bold;margin-right:8px;}
-  .pub-item .journal{color:var(--muted);font-style:italic;}
-  .publication-actions{display:flex;align-items:center;gap:16px;margin-top:18px;}
-  .more-link{display:inline-block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid var(--gold);}
-  .full-publications{display:none;margin-top:32px;scroll-margin-top:70px;}
-  .full-publications:target{display:block;}
-  .full-publications-head{margin-bottom:14px;}
-  .full-publications h3{font-size:17px;font-weight:normal;}
-  .close-link{display:none;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--gold);}
-  #publications .wrap:has(#full-publications:target) .close-link{display:inline-block;}
-  .full-pub-list{margin-left:34px;border-top:1px solid var(--line);}
-  .full-pub-list li{padding:15px 4px 15px 8px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--muted);}
-  .full-pub-list li::marker{color:var(--gold);font-style:italic;}
-  .full-pub-list strong{color:var(--ink);font-weight:normal;}
-
-  .skill-group{margin-top:26px;display:flex;gap:0;border-top:1px solid var(--line);}
-  .skill-col{flex:1;padding:20px 24px;border-right:1px solid var(--line);}
-  .skill-col:last-child{border-right:none;}
-  .skill-col h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
-  .skill-col p{font-size:14.5px;color:var(--ink);}
-
-  footer{
-    background:var(--ink);color:#c9bda3;text-align:center;
-    padding:38px 0;font-size:13px;letter-spacing:.03em;
-    border-top:6px double var(--gold);
-  }
-  footer a{color:#f2ece0;}
-
-  @media (max-width:640px){
-    .hero-inner{flex-direction:column;text-align:center;}
-    .t-item{grid-template-columns:1fr;gap:6px;}
-    .skill-group{flex-direction:column;}
-    .skill-col{border-right:none;border-bottom:1px solid var(--line);}
-    .interest-row{grid-template-columns:34px minmax(0,1fr);gap:18px;}
-    .interest-image{grid-column:2;width:100%;margin-top:4px;}
-  }
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jongsoo Shin</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Jongsoo Shin — climate scientist. Research maps of the CESM1-CDR and CESM2 net-zero / net-negative experiments.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;600&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
-<header class="hero">
-  <div class="wrap hero-inner">
-    <div class="hero-photo"><img src="assets/profile-crop.png" alt="Jongsoo Shin"></div>
-    <div class="hero-text">
-      <div class="eyebrow">Climate & Ocean Science</div>
-      <h1>Jongsoo Shin</h1>
-      <div class="role">Researcher</div>
-      <div class="affil">School of Earth and Environmental Sciences, Seoul National University</div>
-      <div class="hero-links">
-        <a href="mailto:jongsooshin5@gmail.com">jongsooshin5@gmail.com</a>
-        <a href="mailto:jongsoo.shin@whoi.edu">jongsoo.shin@whoi.edu</a>
-      </div>
-    </div>
-  </div>
+<header class="bar">
+  <a class="brand" href="index.html"><b>Jongsoo Shin</b><small data-i18n="brand.affil">Researcher · School of Earth and Environmental Sciences, Seoul National University</small></a>
+  <nav class="bar-exp" aria-label="Experiments">
+    <a href="#cesm1" aria-current="true" data-i18n="exp.cesm1">CESM1-CDR</a>
+    <a href="#cesm2" data-i18n="exp.cesm2">CESM2 Net-Zero / Net-Negative</a>
+  </nav>
+  <nav class="bar-nav" aria-label="Pages">
+    <a href="about.html" data-i18n="nav.about">About</a>
+    <a href="publications.html" data-i18n="nav.pubs">Publications</a>
+    <a href="assets/docs/Jongsoo_Shin_CV.pdf" target="_blank" rel="noopener" data-i18n="nav.cv">CV</a>
+    <button class="lang" type="button" data-lang-toggle lang="ko">한국어</button>
+  </nav>
 </header>
 
-<nav class="subnav">
-  <div class="wrap">
-    <a href="#about">Research</a>
-    <a href="#education">Education</a>
-    <a href="#career">Career</a>
-    <a href="#awards">Awards</a>
-    <a href="#publications">Publications</a>
-    <a href="#skills">Skills</a>
-  </div>
-</nav>
-
-<section id="about">
-  <div class="wrap">
-    <h2 class="section-title">Research Interests</h2>
-    <div class="interest-list">
-      <div class="interest-row">
-        <div class="num">I.</div>
+<main>
+  <section class="plate" id="cesm1" aria-labelledby="cesm1-t">
+    <div class="plate-head">
+      <div class="plate-title">
         <div>
-          <h3>Climate System Reversibility &amp; Hysteresis</h3>
-          <p>How the ocean, land, and atmosphere respond asymmetrically to rising versus falling CO₂ concentrations.</p>
+          <p class="kicker" data-i18n="cesm1.kicker">Experiment I · run by Jongsoo Shin</p>
+          <h1 id="cesm1-t" data-i18n="cesm1.title">CESM1-CDR Experiment</h1>
+          <p class="plate-sub" data-i18n="cesm1.sub">To understand the irreversibility and hysteresis of the climate system in response to ramp-up and ramp-down CO₂ concentrations.</p>
         </div>
-        <figure class="interest-image"><img src="assets/research-hysteresis-infographic.jpg" alt="Infographic showing asymmetric climate responses along increasing and decreasing carbon dioxide pathways" loading="lazy" decoding="async"></figure>
+        <svg class="pathway" viewBox="0 0 128 64" aria-hidden="true">
+          <line class="ax" x1="6" y1="54" x2="124" y2="54"/><line class="ax" x1="6" y1="6" x2="6" y2="54"/>
+          <polyline class="co2" points="6,52 54,12 102,52 124,52"/>
+          <text x="54" y="8" text-anchor="middle">4×CO₂</text>
+          <text x="22" y="62" data-i18n="path.up">ramp-up</text>
+          <text x="72" y="62" data-i18n="path.down">ramp-down</text>
+        </svg>
       </div>
-      <div class="interest-row">
-        <div class="num">II.</div>
-        <div>
-          <h3>Earth System Modeling &amp; Development</h3>
-          <p>Development of the Multi-Column Ocean Model (MCOM) within the CESM2 framework.</p>
-        </div>
-        <figure class="interest-image"><img src="assets/research-modeling-infographic.jpg" alt="Infographic showing multiple vertical ocean columns coupled to the atmosphere and global climate system" loading="lazy" decoding="async"></figure>
-      </div>
-      <div class="interest-row">
-        <div class="num">III.</div>
-        <div>
-          <h3>Net-Zero &amp; Extreme Event Projection</h3>
-          <p>Climate change projection and extreme event risk under net-zero and negative emission scenarios.</p>
-        </div>
-        <figure class="interest-image"><img src="assets/research-net-zero-infographic.jpg" alt="Infographic showing emissions pathways and changing heatwave, heavy precipitation, and drought risks" loading="lazy" decoding="async"></figure>
-      </div>
+      <ul class="legend">
+        <li class="lg-co"><i></i><span data-i18n="lg.co">Co-authored (published)</span></li>
+        <li class="lg-exp"><i></i><span data-i18n="lg.exp">Used the experiment (not co-authored)</span></li>
+        <li class="lg-sub"><i></i><span data-i18n="lg.sub">Submitted / under review</span></li>
+        <li class="lg-prep"><i></i><span data-i18n="lg.prep">In preparation</span></li>
+      </ul>
     </div>
-  </div>
-</section>
-
-<section class="alt" id="education">
-  <div class="wrap">
-    <h2 class="section-title">Education</h2>
-    <div class="timeline">
-      <div class="t-item">
-        <div class="t-date">2022</div>
-        <div>
-          <h3>Ph.D., Atmospheric Sciences — Yonsei University</h3>
-          <p>Thesis: "Irreversible surface temperature change via the delayed North Atlantic and Southern Ocean response to a carbon dioxide removal scenario." Advisor: Soon-Il An</p>
-        </div>
-      </div>
-      <div class="t-item">
-        <div class="t-date">2017</div>
-        <div>
-          <h3>M.Sc., Atmospheric Sciences — Yonsei University</h3>
-          <p>Thesis: "Mechanisms of heat waves over the Korean peninsula, and their projection in the 21st century." Advisor: Soon-Il An</p>
-        </div>
-      </div>
-      <div class="t-item">
-        <div class="t-date">2015</div>
-        <div>
-          <h3>B.Sc., Atmospheric Sciences — Yonsei University</h3>
-        </div>
-      </div>
+    <div class="map" data-map-host="cesm1" aria-label="Map of studies that used the CESM1-CDR experiment"></div>
+    <p class="map-hint"><span class="hint-wide" data-i18n="map.hint">Click a region to open its papers. Click a citation to read the paper.</span><span class="hint-narrow" data-i18n="map.hint.touch">Swipe sideways to see the whole map. Tap a region to list its papers.</span></p>
+    <div class="sheet" data-sheet hidden role="dialog" aria-label="Papers">
+      <div class="sheet-head"><h3></h3><button class="sheet-close" type="button" data-i18n="map.close">Close</button></div>
+      <ol></ol>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="career">
-  <div class="wrap">
-    <h2 class="section-title">Employment History</h2>
-    <div class="timeline">
-      <div class="t-item">
-        <div class="t-date">2026.07 – Present</div>
+  <section class="plate" id="cesm2" aria-labelledby="cesm2-t">
+    <div class="plate-head">
+      <div class="plate-title">
         <div>
-          <h3>Researcher — Seoul National University</h3>
-          <p>Climate system responses to net-zero and net-negative carbon emissions scenarios.</p>
+          <p class="kicker" data-i18n="cesm2.kicker">Experiment II · Yonsei University</p>
+          <h2 id="cesm2-t" data-i18n="cesm2.title">CESM2 Net-Zero and Net-Negative Experiments</h2>
+          <p class="plate-sub" data-i18n="cesm2.sub">Climate responses and extremes under net-zero and net-negative CO₂ emission pathways.</p>
         </div>
+        <svg class="pathway" viewBox="0 0 128 64" aria-hidden="true">
+          <line class="ax" x1="6" y1="6" x2="6" y2="58"/>
+          <line class="zero" x1="6" y1="34" x2="124" y2="34"/>
+          <path class="co2" d="M6 22C24 10 36 8 48 16S64 34 70 34 88 48 100 48H124"/>
+          <text x="72" y="29" data-i18n="path.nz">net zero</text>
+          <text x="126" y="62" text-anchor="end" data-i18n="path.nn">net negative</text>
+        </svg>
       </div>
-      <div class="t-item">
-        <div class="t-date">2023.10 – 2026.06</div>
-        <div>
-          <h3>Research Associate III, Physical Oceanography — WHOI</h3>
-          <p>Developed and integrated the Multi-Column Ocean Model (MCOM) within the CESM2 framework.</p>
-        </div>
-      </div>
-      <div class="t-item">
-        <div class="t-date">2022.09 – 2023.09</div>
-        <div>
-          <h3>Postdoctoral Scientist — POSTECH</h3>
-          <p>Investigated extreme precipitation under net-zero / negative emission scenarios.</p>
-        </div>
-      </div>
+      <ul class="legend">
+        <li class="lg-co"><i></i><span data-i18n="lg.co">Co-authored (published)</span></li>
+        <li class="lg-exp"><i></i><span data-i18n="lg.exp">Used the experiment (not co-authored)</span></li>
+        <li class="lg-sub"><i></i><span data-i18n="lg.sub">Submitted / under review</span></li>
+      </ul>
     </div>
-  </div>
-</section>
+    <div class="map" data-map-host="cesm2" aria-label="Map of studies that used the CESM2 net-zero and net-negative experiments"></div>
+    <p class="map-hint"><span class="hint-wide" data-i18n="map.hint">Click a region to open its papers. Click a citation to read the paper.</span><span class="hint-narrow" data-i18n="map.hint.touch">Swipe sideways to see the whole map. Tap a region to list its papers.</span></p>
+    <div class="sheet" data-sheet hidden role="dialog" aria-label="Papers">
+      <div class="sheet-head"><h3></h3><button class="sheet-close" type="button" data-i18n="map.close">Close</button></div>
+      <ol></ol>
+    </div>
+  </section>
+</main>
 
-<section class="alt" id="awards">
-  <div class="wrap">
-    <h2 class="section-title">Awards &amp; Fellowships</h2>
-    <ul class="award-list">
-      <li><span>Brain Pool, National Research Foundation of Korea</span><span class="yr">2026–2028</span></li>
-      <li><span>Endless Frontier Technical Staff Fellowship, Woods Hole Oceanographic Institution</span><span class="yr">2026</span></li>
-      <li><span>Postdoctoral Fellowship, National Research Foundation of Korea</span><span class="yr">2024–2025</span></li>
-      <li><span>Ph.D. Student Fellowship, National Research Foundation of Korea</span><span class="yr">2019–2021</span></li>
-      <li><span>Best Paper Award, BK21 PLUS at Yonsei University</span><span class="yr">2017</span></li>
-      <li><span>Best Poster Award, the Korean Society of Climate Change Research</span><span class="yr">2017</span></li>
-    </ul>
-  </div>
-</section>
-
-<section id="publications">
-  <div class="wrap">
-    <h2 class="section-title">Selected First-Author Publications</h2>
-    <div class="pub-list">
-      <div class="pub-item"><span class="pub-year">2026.</span>Shin, J., Park, S. W., Kug, J. S., An, S. I. et al. Negative CO₂ emissions for long-term mitigation of extremes in the land hydrological cycle. <span class="journal">Nature Communications.</span></div>
-      <div class="pub-item"><span class="pub-year">2024.</span>Yang, Y. M., Shin, J. et al. Fast reduction of Atlantic SST threatens Europe-wide gross primary productivity under positive and negative CO₂ emissions. <span class="journal">npj Climate and Atmospheric Science, 7(1), 117.</span></div>
-      <div class="pub-item"><span class="pub-year">2019.</span>Shin, J., Olson, R., &amp; An, S. I. Improved probabilistic twenty-first century projections of sea surface temperature over East Asian marginal seas. <span class="journal">Climate Dynamics, 53(9), 6075–6087.</span></div>
-      <div class="pub-item"><span class="pub-year">2018.</span>Shin, J., Olson, R., &amp; An, S. I. Projected heat wave characteristics over the Korean Peninsula during the twenty-first century. <span class="journal">Asia-Pacific Journal of Atmospheric Sciences, 54(1), 53–61.</span></div>
-    </div>
-    <div class="publication-actions">
-      <a class="more-link" href="#full-publications">more</a>
-      <a class="close-link" href="#publications">close</a>
-    </div>
-    <div class="full-publications" id="full-publications">
-      <div class="full-publications-head">
-        <h3>Refereed Publications</h3>
-      </div>
-      <ol class="full-pub-list" reversed start="37">
-        <li><strong>Shin, J., Park, S. W., Kug, J. S., An, S. I., ... &amp; Kim, J. S. (2026).</strong> Negative CO₂ emissions for long-term mitigation of extremes in the land hydrological cycle. <span class="journal">Nature Communications.</span></li>
-        <li><strong>Yang, Y. M., Shin, J., Park, J. H., An, S. I., Wang, B., &amp; Khourdajie, A. (2026).</strong> Reduced mid-latitude El Niño-related precipitation due to Southern Ocean warming under abrupt CO₂ change scenarios. <span class="journal">Climate Dynamics, 64(1), 3.</span></li>
-        <li><strong>Park, B. J., Min, S. K., An, S. I., Yeh, S. W., Son, S. W., Kug, J. S., Jun, S. Y., Shin, J., Ryu, Y. H., &amp; Park, I. H. (2026).</strong> Hemispheric contrast in summer season duration responses to CO₂ removal. <span class="journal">Communications Earth &amp; Environment.</span></li>
-        <li><strong>Cheng, Y., Olson, R., Shin, J., An, S. I., &amp; Chang, W. (2026).</strong> Long-term historical slowdown in Atlantic Meridional Overturning Circulation. <span class="journal">Environmetrics, 37(4), e70101.</span></li>
-        <li><strong>Li, Z. B., Liu, C., Azorin-Molina, C., An, S. I., Zhao, Y., Xu, Y., Shin, J., Chen, D., &amp; Shen, C. (2025).</strong> Asymmetric response of Northern Hemisphere near-surface wind speed to CO₂ removal. <span class="journal">Weather and Climate Dynamics, 6(4), 1107–1117.</span></li>
-        <li><strong>Heo, E. S., An, S. I., &amp; Shin, J. (2025).</strong> Asymmetric impact of the tropical Pacific on summertime Arctic sea ice trends under increasing and decreasing greenhouse gases. <span class="journal">Geophysical Research Letters, 52(14), e2025GL116352.</span></li>
-        <li><strong>Geng, X., Oh, J. H., Shin, Y., Shin, J., Noh, K. M., Park, S. W., &amp; Kug, J. S. (2025).</strong> Nonmonotonic future changes in the North Atlantic warming hole under a fast CO₂ emission scenario. <span class="journal">Journal of Climate, 38(21), 6011–6023.</span></li>
-        <li><strong>Park, S. W., Mun, J. H., Lee, H., Steinert, N. J., An, S. I., Shin, J., &amp; Kug, J. S. (2025).</strong> Continued permafrost ecosystem carbon loss under net-zero and negative emissions. <span class="journal">Science Advances, 11(7), eadn8819.</span></li>
-        <li><strong>Yang, Y. M., Shin, J., Park, S. W., Park, J. H., An, S. I., Kug, J. S., ... &amp; Im, N. (2024).</strong> Fast reduction of Atlantic SST threatens Europe-wide gross primary productivity under positive and negative CO₂ emissions. <span class="journal">npj Climate and Atmospheric Science, 7(1), 117.</span> Equal contribution first author.</li>
-        <li><strong>Paik, S., Kim, D., An, S. I., Oh, H., Shin, J., Goswami, B. B., ... &amp; Mondal, S. K. (2024).</strong> Exploring causes of distinct regional and subseasonal Indian summer monsoon precipitation responses to CO₂ removal. <span class="journal">npj Climate and Atmospheric Science, 7(1), 305.</span></li>
-        <li><strong>Park, I. H., Yeh, S. W., Min, S. K., An, S. I., Xie, S. P., &amp; Shin, J. (2024).</strong> Irreversible changes in the sea surface temperature threshold for tropical convection to CO₂ forcing. <span class="journal">Communications Earth &amp; Environment, 5(1), 659.</span></li>
-        <li><strong>Kim, H. J., Kim, J. S., An, S. I., Shin, J., Oh, J. H., &amp; Kug, J. S. (2024).</strong> Pervasive fire danger continued under a negative emission scenario. <span class="journal">Nature Communications, 15(1), 10010.</span></li>
-        <li><strong>Im, N., Kim, D., An, S. I., Paik, S., Kim, S. K., Shin, J., ... &amp; Oh, H. (2024).</strong> Hysteresis of European summer precipitation under a symmetric CO₂ ramp-up and ramp-down pathway. <span class="journal">Environmental Research Letters.</span></li>
-        <li><strong>Hwang, J., Son, S. W., Garfinkel, C. I., Woollings, T., Yoon, H., An, S. I., ... &amp; Shin, J. (2024).</strong> Asymmetric hysteresis response of mid-latitude storm tracks to CO₂ removal. <span class="journal">Nature Climate Change, 14(5), 496–503.</span></li>
-        <li><strong>Kim, G. I., Oh, J. H., Shin, N. Y., An, S. I., Yeh, S. W., Shin, J., &amp; Kug, J. S. (2024).</strong> Deep ocean warming-induced El Niño changes. <span class="journal">Nature Communications, 15(1), 6225.</span></li>
-        <li><strong>Oh, J. H., Kug, J. S., An, S. I., Jin, F. F., McPhaden, M. J., &amp; Shin, J. (2024).</strong> Emergent climate change patterns originating from deep ocean warming in climate mitigation scenarios. <span class="journal">Nature Climate Change, 1–7.</span></li>
-        <li><strong>Hwang, J., Son, S. W., An, S. I., Kug, J. S., Yeh, S. W., &amp; Shin, J. (2024).</strong> Basin-dependent response of Northern Hemisphere winter blocking frequency to CO₂ removal. <span class="journal">npj Climate and Atmospheric Science, 7(1), 111.</span></li>
-        <li><strong>Lee, Y. H., Yeh, S. W., Hong, J. S., Shin, J., &amp; An, S. I. (2023).</strong> Regime shift increase in East Asia's summer extreme hot day frequency across the late 1990s. <span class="journal">International Journal of Climatology, 43(5), 2305–2317.</span></li>
-        <li><strong>Mondal, S. K., An, S. I., Min, S. K., Kim, S. K., Shin, J., Paik, S., ... &amp; Liu, C. (2023).</strong> Hysteresis and irreversibility of global extreme precipitation to anthropogenic CO₂ emission. <span class="journal">Weather and Climate Extremes, 100561.</span></li>
-        <li><strong>Sung, M. K., An, S. I., Shin, J., Park, J. H., Yang, Y. M., Kim, H. J., &amp; Chang, M. (2023).</strong> Ocean fronts as decadal thermostats modulating continental warming hiatus. <span class="journal">Nature Communications, 14(1), 7777.</span></li>
-        <li><strong>Liu, C., An, S. I., Jin, F. F., Shin, J., Kug, J. S., Zhang, W., ... &amp; Kim, S. K. (2023).</strong> Hysteresis of the El Niño–Southern Oscillation to CO₂ forcing. <span class="journal">Science Advances, 9(31), eadh8442.</span></li>
-        <li><strong>Liu, C., An, S. I., Jin, F. F., Stuecker, M. F., Zhang, W., Kug, J. S., ..., Shin, J., &amp; Kim, S. K. (2023).</strong> ENSO skewness hysteresis and associated changes in strong El Niño under a CO₂ removal scenario. <span class="journal">npj Climate and Atmospheric Science, 6(1), 117.</span></li>
-        <li><strong>Kim, S. K., Shin, J., An, S. I., Kim, H. J., Im, N., Xie, S. P., ... &amp; Yeh, S. W. (2022).</strong> Widespread irreversible changes in surface temperature and precipitation in response to CO₂ forcing. <span class="journal">Nature Climate Change, 12(9), 834–840.</span></li>
-        <li><strong>Kug, J. S., Oh, J. H., An, S. I., Yeh, S. W., Min, S. K., Son, S. W., ... &amp; Shin, J. (2022).</strong> Hysteresis of the intertropical convergence zone to CO₂ forcing. <span class="journal">Nature Climate Change, 12(1), 47–53.</span></li>
-        <li><strong>Song, S. Y., Yeh, S. W., An, S. I., Kug, J. S., Min, S. K., Son, S. W., &amp; Shin, J. (2022).</strong> Asymmetrical response of summer rainfall in East Asia to CO₂ forcing. <span class="journal">Science Bulletin, 67(2), 213–222.</span></li>
-        <li><strong>An, S. I., Park, H. J., Kim, S. K., Shin, J., Yeh, S. W., &amp; Kug, J. S. (2022).</strong> Intensity changes of Indian Ocean dipole mode in a carbon dioxide removal scenario. <span class="journal">npj Climate and Atmospheric Science, 5(1), 1–8.</span></li>
-        <li><strong>An, S. I., Park, S. E., Shin, J., Yang, Y. M., Yeh, S. W., Son, S. W., &amp; Kug, J. S. (2022).</strong> General circulation and global heat transport in a quadrupling CO₂ pulse experiment. <span class="journal">Scientific Reports, 12(1), 1–11.</span></li>
-        <li><strong>Oh, H., An, S. I., Shin, J., Yeh, S. W., Min, S. K., Son, S. W., &amp; Kug, J. S. (2022).</strong> Contrasting hysteresis behaviors of Northern Hemisphere land monsoon precipitation to CO₂ pathways. <span class="journal">Earth's Future, 10(6), e2021EF002623.</span></li>
-        <li><strong>Oh, J. H., An, S. I., Shin, J., &amp; Kug, J. S. (2022).</strong> Centennial memory of the Arctic Ocean for future Arctic climate recovery in response to carbon dioxide removal. <span class="journal">Earth's Future, 10(8), e2022EF002804.</span></li>
-        <li><strong>Jo, S. Y., Seong, M. G., Min, S. K., Kug, J. S., Yeh, S. W., An, S. I., ... &amp; Shin, J. (2022).</strong> Hysteresis behaviors in East Asian extreme precipitation frequency to CO₂ pathway. <span class="journal">Geophysical Research Letters, 49(18), e2022GL099814.</span></li>
-        <li><strong>Pathirana, G., Oh, J. H., Cai, W., An, S. I., Min, S. K., Jo, S. Y., Shin, J., &amp; Kug, J. S. (2022).</strong> Increase in convective extreme El Niño events in a CO₂ removal scenario. <span class="journal">Science Advances, 9(25), eadh2412.</span></li>
-        <li><strong>Kim, S., Choi, Y. J., Son, S. W., An, S. I., Kug, J. S., Yeh, S. W., &amp; Shin, J. (2022).</strong> Hemispherically asymmetric Hadley cell response to CO₂ removal. <span class="journal">Science Advances, 9(30), eadg1801.</span></li>
-        <li><strong>Paik, S., An, S. I., Min, S. K., King, A. D., &amp; Shin, J. (2022).</strong> Hysteretic behavior of global to regional monsoon area under CO₂ ramp-up and ramp-down. <span class="journal">Earth's Future, 11(7), e2022EF003434.</span></li>
-        <li><strong>An, S. I., Shin, J., Yeh, S. W., Son, S. W., Kug, J. S., Min, S. K., &amp; Kim, H. J. (2021).</strong> Global cooling hiatus driven by an AMOC overshoot in a carbon dioxide removal scenario. <span class="journal">Earth's Future, 9(7), e2021EF002165.</span></li>
-        <li><strong>Yeh, S. W., Song, S. Y., Allan, R. P., An, S. I., &amp; Shin, J. (2021).</strong> Contrasting response of hydrological cycle over land and ocean to a changing CO₂ pathway. <span class="journal">npj Climate and Atmospheric Science, 4(1), 1–8.</span></li>
-        <li><strong>Shin, J., Olson, R., &amp; An, S. I. (2019).</strong> Improved probabilistic twenty-first century projections of sea surface temperature over East Asian marginal seas by considering uncertainty owing to model error and internal variability. <span class="journal">Climate Dynamics, 53(9), 6075–6087.</span></li>
-        <li><strong>Shin, J., Olson, R., &amp; An, S. I. (2018).</strong> Projected heat wave characteristics over the Korean Peninsula during the twenty-first century. <span class="journal">Asia-Pacific Journal of Atmospheric Sciences, 54(1), 53–61.</span></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<section class="alt" id="skills">
-  <div class="wrap">
-    <h2 class="section-title">Skills</h2>
-    <div class="skill-group">
-      <div class="skill-col">
-        <h3>Models</h3>
-        <p>CESM (v1 &amp; v2), MCOM</p>
-      </div>
-      <div class="skill-col">
-        <h3>Languages</h3>
-        <p>NCL, Fortran, Python</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    Jongsoo Shin &nbsp;·&nbsp; School of Earth and Environmental Sciences, Seoul National University<br>
-    <a href="mailto:jongsooshin5@gmail.com">jongsooshin5@gmail.com</a> &nbsp;&nbsp; <a href="mailto:jongsoo.shin@whoi.edu">jongsoo.shin@whoi.edu</a>
-  </div>
+<footer class="foot">
+  <span>Jongsoo Shin · <span data-i18n="brand.affil">Researcher · School of Earth and Environmental Sciences, Seoul National University</span></span>
+  <span>jongsooshin5@gmail.com · jongsoo.shin@whoi.edu</span>
+  <span>Map: Natural Earth 1:110m · <span data-i18n="foot.updated">Last updated</span> 2026-11-04</span>
 </footer>
 
+<script src="assets/vendor/d3-array.min.js"></script>
+<script src="assets/vendor/d3-geo.min.js"></script>
+<script src="assets/vendor/topojson-client.min.js"></script>
+<script src="assets/vendor/world-110m.js"></script>
+<script src="data/papers.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/map.js"></script>
 </body>
 </html>
