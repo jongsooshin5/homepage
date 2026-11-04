@@ -15,8 +15,8 @@
   var LEAF_GAP = 34, LEAF_DX = 112, MAX_PER_SIDE = 10;
   var R_HUB = 17, R_PT = 14;          // 아이콘 배지 반지름(px)
   var KINDS = ['co', 'exp', 'sub', 'prep'];
-  // 지도 남쪽 끝 위도. 기본은 남극을 빼고 64°S 까지, window.MAP_SOUTH = -90 이면 남극까지 그린다.
-  var SOUTH = typeof window.MAP_SOUTH === 'number' ? window.MAP_SOUTH : -64;
+  // 지도 남쪽 끝 위도. 기본은 남극까지 포함한 전구(-90), window.MAP_SOUTH = -64 처럼 주면 그 위도에서 자른다.
+  var SOUTH = typeof window.MAP_SOUTH === 'number' ? window.MAP_SOUTH : -90;
 
   // 16px 상자 중심 기준 도식 아이콘 (선 아이콘, .solid 는 채움)
   var ICONS = {
@@ -125,7 +125,7 @@
     var W, H;
     if (narrow) {
       // 좁은 화면: 지도를 높이에 맞춰 크게 그리고 좌우로 밀어 보게 한다(라벨 크기 유지). 폭은 실제 지도 비율로 정해 빈 띠가 없다.
-      H = Math.max(300, Math.round(window.innerHeight * 0.58));
+      H = Math.max(320, Math.round(window.innerHeight * 0.62));
       var nh = d3.geoPath(d3.geoNaturalEarth1().fitHeight(H - 4, outline)).bounds(outline);
       W = Math.max(host.clientWidth, Math.ceil(nh[1][0] - nh[0][0]) + 4);
     } else {

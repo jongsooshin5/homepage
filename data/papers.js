@@ -68,8 +68,8 @@ window.SITE_REGIONS = {
    "id": "npac",
    "name": "North Pacific",
    "ll": [
-    160,
-    38
+    163,
+    41
    ],
    "icon": "heat"
   },
@@ -78,7 +78,7 @@ window.SITE_REGIONS = {
    "name": "Tropical cyclones",
    "ll": [
     142,
-    14
+    12
    ],
    "icon": "wind"
   },
@@ -95,8 +95,8 @@ window.SITE_REGIONS = {
    "id": "hadley",
    "name": "Subtropics",
    "ll": [
-    -24,
-    -30
+    -20,
+    -33
    ],
    "icon": "arrow"
   },
@@ -105,7 +105,7 @@ window.SITE_REGIONS = {
    "name": "South America",
    "ll": [
     -62,
-    -8
+    -6
    ],
    "icon": "fire"
   },
