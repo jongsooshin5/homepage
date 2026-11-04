@@ -64,7 +64,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   background: var(--paper);
   border-bottom: 1px solid var(--line);
 }
-.brand { display: flex; flex-direction: column; line-height: 1.15; text-decoration: none; min-width: 0; }
+.brand { display: flex; flex-direction: column; line-height: 1.15; text-decoration: none; flex: 0 0 auto; white-space: nowrap; }
 .brand b { font: 600 1.3rem/1.2 var(--display); }
 .bar-exp { display: flex; gap: 4px; margin-left: auto; }
 .bar-exp a, .bar-nav a, .lang {
@@ -74,6 +74,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .bar-exp a:hover, .bar-nav a:hover, .lang:hover { color: var(--ink); background: var(--grid); }
 .bar-exp a[aria-current="location"], .bar-nav a[aria-current="page"] { color: var(--accent); background: var(--tint); }
 .bar-nav { display: flex; gap: 2px; padding-left: 14px; border-left: 1px solid var(--line); }
+/* 메뉴가 화면보다 넓으면 이름 대신 메뉴 줄만 옆으로 밀린다 */
+.bar-nav { min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.bar-nav::-webkit-scrollbar { display: none; }
+.nav-short { display: none; }
 .lang { border: 1px solid var(--line); background: var(--paper); cursor: pointer; letter-spacing: .02em; }
 .brand + .bar-nav { margin-left: auto; border-left: 0; padding-left: 0; }
 
@@ -355,10 +359,17 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @media (max-width: 560px) {
   .bar { gap: 8px; }
   .brand b { font-size: 1.1rem; }
-  .bar-nav a, .lang { padding: 8px 7px; font-size: .88rem; }
+  .bar-nav a, .lang { padding: 8px 6px; font-size: .84rem; }
+  .nav-long { display: none; } .nav-short { display: inline; }
   .plate-head { gap: 8px; }
   .key { margin-left: 0; width: 100%; padding: 8px 10px; gap: 8px 16px; }
   .pathway { width: 100%; max-width: 260px; height: auto; }
   .legend { grid-template-columns: 1fr 1fr; column-gap: 12px; font-size: .8rem; }
   .map-hint { max-width: none; }
+}
+@media (max-width: 380px) {
+  .bar { gap: 4px; }
+  .brand b { font-size: .98rem; }
+  .bar-nav { gap: 0; }
+  .bar-nav a, .lang { padding: 7px 4px; font-size: .78rem; }
 }
