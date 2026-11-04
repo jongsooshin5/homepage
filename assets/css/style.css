@@ -33,16 +33,19 @@
   --body: "IBM Plex Sans", "IBM Plex Sans KR", "Apple SD Gothic Neo", "Segoe UI", sans-serif;
   --label: "IBM Plex Sans Condensed", "IBM Plex Sans KR", "Arial Narrow", sans-serif;
 
-  --bar-h: 60px;
+  --bar-h: 3.75rem;
+  --maxw: 80rem;          /* 가운데 모은 내용 폭 (기본 글자 크기를 따라 커짐) */
 }
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* 큰 모니터(QHD·4K)에서는 기본 글자를 화면 폭에 비례해 키워(최대 24px) 100% 배율에서도 확대한 듯한 비율이 되게 한다.
+   노트북(1366–1536px)은 15–16px 그대로. 내용 폭(--maxw)과 지도도 이 크기를 따라 함께 커진다. */
+html { scroll-behavior: smooth; font-size: clamp(15px, calc(.42vw + 9.5px), 24px); }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font: 15px/1.6 var(--body);
+  font: 1rem/1.6 var(--body);
   word-break: keep-all;
   overflow-wrap: break-word;
 }
@@ -56,8 +59,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
   height: var(--bar-h);
   display: flex; align-items: center; gap: 20px;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 0px), calc((100% - var(--maxw)) / 2 + 16px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px), calc((100% - var(--maxw)) / 2 + 16px));
   background: var(--paper);
   border-bottom: 1px solid var(--line);
 }
@@ -77,6 +80,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 /* ---------------------------------------------------------------- intro + section title */
 .intro {
   display: flex; align-items: center; gap: 14px 22px; flex-wrap: wrap;
+  max-width: var(--maxw); margin-inline: auto;
   padding-block: 14px 14px;
   border-bottom: 3px solid var(--rule);        /* 소개와 Research Interests 를 가르는 긴 가로선 */
   padding-left: max(16px, env(safe-area-inset-left, 0px));
@@ -94,7 +98,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .intro-contact a { color: var(--accent); font-weight: 600; text-decoration: none; }
 .intro-contact a:hover { text-decoration: underline; }
 .ri-title {
-  margin: 0; padding-block: 14px 0;
+  margin: 0 auto; padding-block: 14px 0; max-width: var(--maxw);
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   font: 600 clamp(1.8rem, 3vw, 2.35rem)/1.1 var(--display); letter-spacing: -.01em;
@@ -104,6 +108,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 /* ---------------------------------------------------------------- experiment plate */
 .plate {
   display: flex; flex-direction: column;
+  max-width: var(--maxw); margin-inline: auto;
   padding-block: 8px 6px;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
@@ -112,7 +117,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 }
 .plate + .plate { border-top: 3px solid var(--rule); margin-top: 14px; padding-top: 16px; }
 .plate-head { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 10px 28px; }
-.plate-title { flex: 1 1 420px; min-width: 0; }
+.plate-title { flex: 1 1 26rem; min-width: 0; }
 .exp-no { margin: 0 0 3px; font: 400 .95rem/1.5 var(--body); color: var(--muted); }
 .exp-no > span:first-child {
   display: inline-block; padding: 1px 10px; border-radius: 999px;
@@ -127,7 +132,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   background: var(--wash); border: 1px solid var(--line); border-radius: 10px; padding: 8px 14px;
 }
 .key-side { display: grid; gap: 6px; min-width: 0; }
-.pathway { flex: 0 0 auto; width: 232px; height: 96px; max-width: 100%; }
+.pathway { flex: 0 0 auto; width: 14.5rem; height: 6rem; max-width: 100%; }
 .pathway .ax { stroke: #a9b6c0; stroke-width: 1; }
 .pathway .area-up { fill: var(--up); opacity: .12; }
 .pathway .area-down { fill: var(--down); opacity: .12; }
@@ -151,11 +156,11 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .lg-prep i { background: var(--prep); }
 .lg-co { color: var(--co); } .lg-exp { color: var(--exp); } .lg-sub { color: var(--sub); } .lg-prep { color: var(--prep); }
 
-.map { flex: 0 0 auto; position: relative; margin-top: 6px; }
-.map > svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; }
+.map { flex: 0 0 auto; position: relative; margin-top: 8px; }
+.map > svg { display: block; margin: 0 auto; overflow: visible; }
 .map-hint { margin: 0; max-width: 34ch; font: 400 .8rem/1.4 var(--label); color: var(--muted); }
 .hint-narrow { display: none; }
-@media (max-width: 720px) { .hint-wide { display: none; } .hint-narrow { display: inline; } }
+.is-compact .hint-wide { display: none; } .is-compact .hint-narrow { display: inline; }
 .map-empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: .9rem; }
 
 /* ---------------------------------------------------------------- map marks */
@@ -237,7 +242,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* ---------------------------------------------------------------- text pages (about, publications) */
 .page {
-  max-width: 980px; margin: 0 auto;
+  max-width: 62rem; margin: 0 auto;
   padding-block: 40px 64px;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
@@ -321,6 +326,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 /* ---------------------------------------------------------------- footer */
 .foot {
   padding-block: 18px 26px;
+  max-width: var(--maxw); margin-inline: auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
   border-top: 3px solid var(--rule);

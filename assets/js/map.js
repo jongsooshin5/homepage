@@ -5,13 +5,14 @@
    - 논문이 2편 이상인 지역 = 허브(아이콘 + 지역명 + 편수). 아이콘을 누르면 논문 가지가 펼쳐진다(마우스는 올리면 미리보기).
      가지는 이웃 표지를 덜 덮는 쪽으로 펼친다.
    - 논문이 1편인 지역 = 아이콘 하나(위: 주제, 아래: 1저자 et al. 연도 (저널)), 누르면 논문으로 이동.
-   - 지도 높이는 화면 폭에 맞춘 자연 높이와 '실험 제목 아래 남은 화면 높이' 중 작은 값이라 위아래 빈칸이 생기지 않는다.
-   - 좁은 화면에서는 가지 대신 하단 시트에 목록을 띄운다.
+   - 지도는 고정 설계 폭(DESIGN_MIN~MAX 단위)으로 그리고 SVG 를 그림처럼 늘리고 줄인다. 그래서 브라우저 확대·축소나
+     큰 모니터에서 지도 속 라벨도 다른 글자와 같은 비율로 움직인다. 표시 폭은 담는 상자 폭과 '실험 제목 아래 남은 화면 높이에 들어가는 폭' 중 작은 값.
+   - 지도 상자가 COMPACT_W 보다 좁으면(휴대폰·좁은 창) 라벨 없이 아이콘만 두고, 누르면 하단 시트에 목록을 띄운다.
    ?debug 를 붙이면 평상시 라벨끼리 겹치는 곳을 콘솔에 찍는다. */
 (function () {
   'use strict';
   var NS = 'http://www.w3.org/2000/svg';
-  var NARROW = '(max-width: 720px)';
+  var DESIGN_MIN = 1150, DESIGN_MAX = 1280, COMPACT_W = 900;   // 설계 폭 범위(좌표 단위), 아이콘만 쓰는 상자 폭(px)
   var LEAF_GAP = 34, LEAF_DX = 112, MAX_PER_SIDE = 10;
   var R_HUB = 17, R_PT = 14;          // 아이콘 배지 반지름(px)
   var KINDS = ['co', 'exp', 'sub', 'prep'];
@@ -120,29 +121,32 @@
       var m = document.createElement('p'); m.className = 'map-empty'; m.textContent = t('map.fail'); host.appendChild(m);
       return;
     }
-    var narrow = this.narrow();
+    var plate = host.closest('.plate') || host.parentNode;
+    var boxW = host.clientWidth, narrow = this.compact = boxW < COMPACT_W;
+    plate.classList.toggle('is-compact', narrow);
     var outline = SOUTH <= -89 ? { type: 'Sphere' } : d3.geoGraticule().extent([[-180, SOUTH], [180, 84]]).outline();
-    // 폭에 맞춘 자연 높이. 넓은 화면은 '실험 제목 아래 남은 화면 높이'로 한 번 더 제한한다.
-    // 좁은 화면(휴대폰)은 세계 전체를 화면 폭에 맞춰 그리고, 글자 라벨 없이 작은 아이콘만 둔다(누르면 하단 목록).
-    var W = Math.max(narrow ? 200 : 320, host.clientWidth);
+    // 좌표계 폭 W: 넓은 상자는 고정 설계 폭(라벨이 지도와 함께 커지고 작아짐), 좁은 상자는 실제 픽셀 폭.
+    var W = narrow ? Math.max(200, boxW) : clamp(boxW, DESIGN_MIN, DESIGN_MAX);
     var nb = d3.geoPath(d3.geoNaturalEarth1().fitWidth(W - 4, outline)).bounds(outline);
     var H = Math.ceil(nb[1][1] - nb[0][1]) + 4;
-    if (!narrow) {
-      var plate = host.closest('.plate') || host.parentNode;
+    var dispW = boxW;
+    if (!narrow) {                                                    // 실험 제목과 지도가 한 화면에 들어가도록 표시 폭을 제한
+      var barEl = document.querySelector('.bar'), bar = barEl ? barEl.offsetHeight : 60;
       var above = host.getBoundingClientRect().top - plate.getBoundingClientRect().top;
-      var bar = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--bar-h')) || 60;
-      H = Math.max(320, Math.min(H, window.innerHeight - bar - above - 16));
+      dispW = Math.min(boxW, Math.max(COMPACT_W, (window.innerHeight - bar - above - 16) * W / H));
     }
-    host.style.height = H + 'px';
+    var dispH = Math.round(dispW * H / W);
+    host.style.height = dispH + 'px';
     this.W = W; this.H = H;
-    this.rHub = narrow ? 9 : R_HUB;
-    this.rPt = narrow ? 8 : R_PT;
+    this.rHub = narrow ? clamp(W / 90, 9, 12) : R_HUB;
+    this.rPt = narrow ? clamp(W / 100, 8, 10) : R_PT;
     var proj = d3.geoNaturalEarth1().fitExtent([[2, 2], [W - 2, H - 2]], outline);
     var path = d3.geoPath(proj);
     this.proj = proj;
 
     var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'group', 'aria-label': host.getAttribute('aria-label') || '',
       'class': narrow ? 'is-narrow' : null }, host);
+    svg.style.width = dispW + 'px'; svg.style.height = dispH + 'px';
     this.svg = svg;
     var cid = 'clip-' + this.key;
     var defs = el('defs', null, svg);
@@ -316,7 +320,7 @@
     });
   };
 
-  MapView.prototype.narrow = function () { return window.matchMedia && window.matchMedia(NARROW).matches; };
+  MapView.prototype.narrow = function () { return !!this.compact; };
   MapView.prototype.toggle = function (id, opener) {
     if (this.narrow()) { var h = this.hubs[id]; if (h) this.openSheet(h.r, h.list, opener || h.g); return; }
     this.setPinned(this.pinned === id ? null : id);
