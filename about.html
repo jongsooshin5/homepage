@@ -39,7 +39,24 @@
     <h2 id="ri"><span data-lang="en">Research interests</span><span data-lang="ko" hidden>연구 분야</span></h2>
     <div class="interests">
       <figure class="interest">
-        <img src="assets/img/research-hysteresis-infographic.jpg" alt="Asymmetric climate responses along increasing and decreasing CO₂ pathways" loading="lazy" width="660" height="440">
+        <svg class="ri-fig" viewBox="0 0 300 200" role="img" aria-labelledby="f1-t">
+          <title id="f1-t">Hysteresis loop: the climate response on the ramp-down path does not return to its starting value</title>
+          <defs>
+            <marker id="ah-up" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="m-up" d="M1 1L9 5L1 9Z"/></marker>
+            <marker id="ah-down" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="m-down" d="M1 1L9 5L1 9Z"/></marker>
+            <marker id="ah-gap" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="m-ink" d="M1 1L9 5L1 9Z"/></marker>
+          </defs>
+          <line class="f-ax" x1="40" y1="168" x2="284" y2="168"/><line class="f-ax" x1="40" y1="168" x2="40" y2="24"/>
+          <text class="f-axl" x="282" y="186" text-anchor="end" data-i18n="ri.f1.x">CO₂ concentration</text>
+          <text class="f-axl" x="44" y="18" data-i18n="ri.f1.y">Climate response</text>
+          <path class="f-up" d="M52 158C150 158 220 122 258 50" marker-end="url(#ah-up)"/>
+          <path class="f-down" d="M256 40C200 44 110 70 60 103" marker-end="url(#ah-down)"/>
+          <circle class="f-dot" cx="52" cy="158" r="3"/>
+          <line class="f-gap" x1="56" y1="110" x2="56" y2="151" marker-start="url(#ah-gap)" marker-end="url(#ah-gap)"/>
+          <text class="t-ink" x="66" y="135" data-i18n="ri.f1.gap">irreversible</text>
+          <text class="t-up" x="214" y="150" data-i18n="path.up">ramp-up</text>
+          <text class="t-down" x="152" y="46" text-anchor="middle" data-i18n="path.down">ramp-down</text>
+        </svg>
         <figcaption>
           <b data-lang="en">Climate system reversibility and hysteresis</b><b data-lang="ko" hidden>기후시스템의 가역성과 이력현상</b>
           <span data-lang="en">How the ocean, land and atmosphere respond asymmetrically to rising versus falling CO₂.</span>
@@ -47,7 +64,34 @@
         </figcaption>
       </figure>
       <figure class="interest">
-        <img src="assets/img/research-modeling-infographic.jpg" alt="Vertical ocean columns coupled to the atmosphere in a global climate model" loading="lazy" width="660" height="440">
+        <svg class="ri-fig" viewBox="0 0 300 200" role="img" aria-labelledby="f2-t">
+          <title id="f2-t">MCOM in CESM2: independent one-dimensional ocean columns exchange heat and water with the atmosphere</title>
+          <defs>
+            <marker id="ah-flux" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path class="m-flux" d="M1 1L9 5L1 9Z"/></marker>
+          </defs>
+          <rect class="f-atm" x="20" y="18" width="260" height="40" rx="8"/>
+          <text class="t-atm" x="32" y="43" data-i18n="ri.f2.atm">Atmosphere</text>
+          <text class="t-model" x="268" y="43" text-anchor="end">CESM2</text>
+          <g class="f-cols">
+            <rect class="c1" x="28" y="84" width="36" height="22"/><rect class="c2" x="28" y="106" width="36" height="26"/><rect class="c3" x="28" y="132" width="36" height="36"/>
+            <rect class="c1" x="80" y="84" width="36" height="22"/><rect class="c2" x="80" y="106" width="36" height="26"/><rect class="c3" x="80" y="132" width="36" height="36"/>
+            <rect class="c1" x="132" y="84" width="36" height="22"/><rect class="c2" x="132" y="106" width="36" height="26"/><rect class="c3" x="132" y="132" width="36" height="36"/>
+            <rect class="c1" x="184" y="84" width="36" height="22"/><rect class="c2" x="184" y="106" width="36" height="26"/><rect class="c3" x="184" y="132" width="36" height="36"/>
+            <rect class="c1" x="236" y="84" width="36" height="22"/><rect class="c2" x="236" y="106" width="36" height="26"/><rect class="c3" x="236" y="132" width="36" height="36"/>
+          </g>
+          <g class="f-flux">
+            <line x1="46" y1="63" x2="46" y2="79" marker-start="url(#ah-flux)" marker-end="url(#ah-flux)"/>
+            <line x1="98" y1="63" x2="98" y2="79" marker-start="url(#ah-flux)" marker-end="url(#ah-flux)"/>
+            <line x1="150" y1="63" x2="150" y2="79" marker-start="url(#ah-flux)" marker-end="url(#ah-flux)"/>
+            <line x1="202" y1="63" x2="202" y2="79" marker-start="url(#ah-flux)" marker-end="url(#ah-flux)"/>
+            <line x1="254" y1="63" x2="254" y2="79" marker-start="url(#ah-flux)" marker-end="url(#ah-flux)"/>
+          </g>
+          <g class="f-mix">
+            <path d="M46 90V126M43 93l3-3 3 3M43 123l3 3 3-3"/><path d="M98 90V126M95 93l3-3 3 3M95 123l3 3 3-3"/><path d="M150 90V126M147 93l3-3 3 3M147 123l3 3 3-3"/>
+            <path d="M202 90V126M199 93l3-3 3 3M199 123l3 3 3-3"/><path d="M254 90V126M251 93l3-3 3 3M251 123l3 3 3-3"/>
+          </g>
+          <text class="f-axl" x="150" y="188" text-anchor="middle" data-i18n="ri.f2.ocn">1-D ocean columns (MCOM)</text>
+        </svg>
         <figcaption>
           <b data-lang="en">Earth system modeling and development</b><b data-lang="ko" hidden>지구시스템 모델 개발</b>
           <span data-lang="en">Development of the Multi-Column Ocean Model (MCOM) within the CESM2 framework.</span>
@@ -55,7 +99,25 @@
         </figcaption>
       </figure>
       <figure class="interest">
-        <img src="assets/img/research-net-zero-infographic.jpg" alt="Emission pathways with changing heatwave, heavy precipitation and drought risks" loading="lazy" width="660" height="440">
+        <svg class="ri-fig" viewBox="0 0 300 200" role="img" aria-labelledby="f3-t">
+          <title id="f3-t">CO₂ emissions fall to net zero or net negative; heatwaves, extreme rain and drought are projected along each pathway</title>
+          <text class="f-axl" x="22" y="20" data-i18n="path.emis">CO₂ emissions</text>
+          <line class="f-ax" x1="26" y1="28" x2="26" y2="176"/>
+          <line class="f-zero" x1="26" y1="96" x2="186" y2="96"/><text x="21" y="99" text-anchor="end">0</text>
+          <path class="a-up" d="M26 96V74C46 50 60 36 78 38S118 70 126 96Z"/>
+          <path class="a-down" d="M126 96C136 118 146 138 160 138S180 112 186 96Z"/>
+          <path class="f-up" d="M26 74C46 50 60 36 78 38S118 70 126 96"/>
+          <path class="f-down" d="M126 96C136 118 146 138 160 138S180 112 186 96"/>
+          <path class="f-rest" d="M126 96H186"/>
+          <text class="t-rest" x="186" y="89" text-anchor="end" data-i18n="path.nz">net zero</text>
+          <text class="t-down" x="158" y="156" text-anchor="middle" data-i18n="path.nn">net negative</text>
+          <g transform="translate(212 52)"><circle class="b-heat" r="13"/><g class="f-ico" transform="scale(1.2)"><path d="M-1.8-5.6A1.8 1.8 0 0 1 1.8-5.6V1.2A3.6 3.6 0 1 1-1.8 1.2Z"/><circle class="solid" cx="0" cy="3.6" r="1.6"/></g></g>
+          <g transform="translate(212 98)"><circle class="b-rain" r="13"/><g class="f-ico" transform="scale(1.2)"><path class="solid" d="M0 -7C3 -3 5 -.5 5 2A5 5 0 0 1-5 2C-5-.5-3-3 0-7Z"/></g></g>
+          <g transform="translate(212 144)"><circle class="b-dry" r="13"/><g class="f-ico" transform="scale(1.2)"><circle cx="0" cy="0" r="2.8"/><path d="M0-7V-5M0 5V7M-7 0H-5M5 0H7M-5-5 -3.6-3.6M3.6 3.6 5 5M-5 5-3.6 3.6M3.6-3.6 5-5"/></g></g>
+          <text class="t-ink" x="232" y="56" data-i18n="ri.f3.heat">Heatwaves</text>
+          <text class="t-ink" x="232" y="102" data-i18n="ri.f3.rain">Extreme rain</text>
+          <text class="t-ink" x="232" y="148" data-i18n="ri.f3.dry">Drought</text>
+        </svg>
         <figcaption>
           <b data-lang="en">Net-zero and extreme event projection</b><b data-lang="ko" hidden>탄소중립과 극한현상 전망</b>
           <span data-lang="en">Climate change and extreme event risk under net-zero and negative emission scenarios.</span>

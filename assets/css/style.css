@@ -76,7 +76,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 /* ---------------------------------------------------------------- intro + section title */
 .intro {
   display: flex; align-items: center; gap: 14px 22px; flex-wrap: wrap;
-  padding-block: 14px 0;
+  padding-block: 14px 14px;
+  border-bottom: 1px solid #c9d6e0;            /* 소개와 Research Interests 를 가르는 긴 가로선 */
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
@@ -252,7 +253,30 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .contact span { user-select: all; }
 .interests { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .interest { margin: 0; display: grid; gap: 10px; align-content: start; }
-.interest img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border: 1px solid var(--line); border-radius: 4px; }
+/* About 연구 분야 도식 (인라인 SVG, 300×200) */
+.ri-fig { width: 100%; height: auto; aspect-ratio: 3 / 2; display: block; background: var(--wash); border: 1px solid var(--line); border-radius: 8px; }
+.ri-fig text { font: 500 11px var(--label); fill: var(--muted); }
+.ri-fig .f-axl { font-weight: 600; fill: var(--ink); }
+.ri-fig .f-ax { stroke: #a9b6c0; stroke-width: 1; }
+.ri-fig .f-up, .ri-fig .f-down, .ri-fig .f-rest { fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.ri-fig .f-up { stroke: var(--up); } .ri-fig .f-down { stroke: var(--down); } .ri-fig .f-rest { stroke: var(--rest); }
+.ri-fig .a-up { fill: var(--up); opacity: .12; } .ri-fig .a-down { fill: var(--down); opacity: .12; }
+.ri-fig .f-zero { stroke: var(--muted); stroke-width: .8; stroke-dasharray: 3 3; }
+.ri-fig .f-dot { fill: var(--up); }
+.ri-fig .f-gap { stroke: var(--ink); stroke-width: 1.2; }
+.ri-fig .m-up { fill: var(--up); } .ri-fig .m-down { fill: var(--down); } .ri-fig .m-ink { fill: var(--ink); } .ri-fig .m-flux { fill: #48628a; }
+.ri-fig .t-up, .ri-fig .t-down, .ri-fig .t-rest, .ri-fig .t-ink { font-weight: 600; }
+.ri-fig .t-up { fill: var(--up); } .ri-fig .t-down { fill: var(--down); } .ri-fig .t-rest { fill: var(--rest); } .ri-fig .t-ink { fill: var(--ink); }
+.ri-fig .f-atm { fill: #dcebfa; }
+.ri-fig .t-atm { font: 600 12px var(--label); fill: var(--accent); }
+.ri-fig .t-model { font: 600 11px var(--label); fill: var(--muted); letter-spacing: .04em; }
+.ri-fig .f-cols .c1 { fill: #a9cdeb; } .ri-fig .f-cols .c2 { fill: #5b97cf; } .ri-fig .f-cols .c3 { fill: #26588f; }
+.ri-fig .f-flux line { stroke: #48628a; stroke-width: 1.4; }
+.ri-fig .f-mix path { fill: none; stroke: #fff; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.ri-fig .f-ico { fill: none; stroke: #fff; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.ri-fig .f-ico .solid { fill: #fff; stroke: none; }
+.ri-fig .b-heat, .ri-fig .b-rain, .ri-fig .b-dry { stroke: #fff; stroke-width: 2; }
+.ri-fig .b-heat { fill: #c8581a; } .ri-fig .b-rain { fill: #2b6cb0; } .ri-fig .b-dry { fill: #9a6510; }
 .interest figcaption { display: grid; gap: 4px; }
 .interest b { font-weight: 600; }
 .interest span { color: var(--muted); font-size: .92rem; }
