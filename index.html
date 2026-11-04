@@ -5,18 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Jongsoo Shin</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Jongsoo Shin — climate scientist. Research maps of the CESM1-CDR and CESM2 net-zero / net-negative experiments.">
+<meta name="description" content="Jongsoo Shin, Research Assistant Professor at Seoul National University. Research maps of the CESM1-CDR and CESM2 net-zero / net-negative experiments.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;600&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;600&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&family=Noto+Serif+KR:wght@600&display=swap">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <header class="bar">
-  <a class="brand" href="index.html"><b>Jongsoo Shin</b><small data-i18n="brand.affil">Researcher · School of Earth and Environmental Sciences, Seoul National University</small></a>
+  <a class="brand" href="index.html"><b>Jongsoo Shin</b></a>
   <nav class="bar-exp" aria-label="Experiments">
-    <a href="#cesm1" aria-current="true" data-i18n="exp.cesm1">CESM1-CDR</a>
+    <a href="#cesm1" aria-current="location" data-i18n="exp.cesm1">CESM1-CDR</a>
     <a href="#cesm2" data-i18n="exp.cesm2">CESM2 Net-Zero / Net-Negative</a>
   </nav>
   <nav class="bar-nav" aria-label="Pages">
@@ -27,32 +27,52 @@
 </header>
 
 <main>
+  <section class="intro" aria-label="Jongsoo Shin">
+    <img class="intro-photo" src="assets/img/profile-crop.png" alt="Portrait of Jongsoo Shin" width="96" height="96">
+    <div class="intro-text">
+      <p class="intro-name">Jongsoo Shin <span class="intro-ko" lang="ko">신종수</span></p>
+      <p class="intro-role"><b data-i18n="role">Research Assistant Professor</b> · <span data-i18n="affil">School of Earth and Environmental Sciences, Seoul National University</span></p>
+      <p class="intro-contact"><span>jongsooshin5@gmail.com</span><span>jongsoo.shin@whoi.edu</span><a href="about.html" data-i18n="intro.more">More about me</a></p>
+    </div>
+  </section>
+
+  <h1 class="ri-title" data-i18n="ri.title">Research Interests</h1>
+
   <section class="plate" id="cesm1" aria-labelledby="cesm1-t">
     <div class="plate-head">
       <div class="plate-title">
         <div>
-          <p class="kicker" data-i18n="cesm1.kicker">Experiment I · run by Jongsoo Shin</p>
-          <h1 id="cesm1-t" data-i18n="cesm1.title">CESM1-CDR Experiment</h1>
+          <p class="exp-no"><span data-i18n="cesm1.no">Experiment I</span> <span class="exp-meta" data-i18n="cesm1.meta">· run by Jongsoo Shin</span></p>
+          <h2 id="cesm1-t" data-i18n="cesm1.title">CESM1-CDR Experiment</h2>
           <p class="plate-sub" data-i18n="cesm1.sub">To understand the irreversibility and hysteresis of the climate system in response to ramp-up and ramp-down CO₂ concentrations.</p>
         </div>
-        <svg class="pathway" viewBox="0 0 128 64" aria-hidden="true">
-          <line class="ax" x1="6" y1="54" x2="124" y2="54"/><line class="ax" x1="6" y1="6" x2="6" y2="54"/>
-          <polyline class="co2" points="6,52 54,12 102,52 124,52"/>
-          <text x="54" y="8" text-anchor="middle">4×CO₂</text>
-          <text x="22" y="62" data-i18n="path.up">ramp-up</text>
-          <text x="72" y="62" data-i18n="path.down">ramp-down</text>
-        </svg>
       </div>
-      <ul class="legend">
-        <li class="lg-co"><i></i><span data-i18n="lg.co">Co-authored (published)</span></li>
-        <li class="lg-exp"><i></i><span data-i18n="lg.exp">Used the experiment (not co-authored)</span></li>
-        <li class="lg-sub"><i></i><span data-i18n="lg.sub">Submitted / under review</span></li>
-        <li class="lg-prep"><i></i><span data-i18n="lg.prep">In preparation</span></li>
-      </ul>
+      <div class="key">
+        <svg class="pathway" viewBox="0 0 232 96" aria-hidden="true">
+          <text class="axl" x="2" y="10">CO₂</text>
+          <path class="area-up" d="M26 74V72L92 18V74Z"/><path class="area-down" d="M92 74V18L158 72V74Z"/>
+          <line class="ax" x1="26" y1="14" x2="26" y2="74"/><line class="ax" x1="26" y1="74" x2="228" y2="74"/>
+          <line class="seg seg-up" x1="26" y1="72" x2="92" y2="18"/>
+          <line class="seg seg-down" x1="92" y1="18" x2="158" y2="72"/>
+          <line class="seg seg-rest" x1="158" y1="72" x2="228" y2="72"/>
+          <text class="pk" x="92" y="12" text-anchor="middle">4×CO₂</text>
+          <text class="ph ph-up" x="56" y="90" text-anchor="middle" data-i18n="path.up">ramp-up</text>
+          <text class="ph ph-down" x="126" y="90" text-anchor="middle" data-i18n="path.down">ramp-down</text>
+          <text class="ph ph-rest" x="194" y="90" text-anchor="middle" data-i18n="path.rest">restoring</text>
+        </svg>
+        <div class="key-side">
+          <ul class="legend">
+            <li class="lg-co"><i></i><span data-i18n="lg.co">Co-authored (published)</span></li>
+            <li class="lg-exp"><i></i><span data-i18n="lg.exp">Used the experiment (not co-authored)</span></li>
+            <li class="lg-sub"><i></i><span data-i18n="lg.sub">Submitted / under review</span></li>
+            <li class="lg-prep"><i></i><span data-i18n="lg.prep">In preparation</span></li>
+          </ul>
+          <p class="map-hint"><span class="hint-wide" data-i18n="map.hint">Click an icon to open its papers. Click a citation to read the paper.</span><span class="hint-narrow" data-i18n="map.hint.touch">Swipe sideways to see the whole map. Tap an icon to list its papers.</span></p>
+        </div>
+      </div>
     </div>
     <div class="map" data-map-host="cesm1" aria-label="Map of studies that used the CESM1-CDR experiment"></div>
-    <p class="map-hint"><span class="hint-wide" data-i18n="map.hint">Click a region to open its papers. Click a citation to read the paper.</span><span class="hint-narrow" data-i18n="map.hint.touch">Swipe sideways to see the whole map. Tap a region to list its papers.</span></p>
-    <div class="sheet" data-sheet hidden role="dialog" aria-label="Papers">
+    <div class="sheet" data-sheet hidden role="dialog" aria-modal="true" aria-labelledby="sheet-cesm1">
       <div class="sheet-head"><h3></h3><button class="sheet-close" type="button" data-i18n="map.close">Close</button></div>
       <ol></ol>
     </div>
@@ -62,27 +82,35 @@
     <div class="plate-head">
       <div class="plate-title">
         <div>
-          <p class="kicker" data-i18n="cesm2.kicker">Experiment II · Yonsei University</p>
+          <p class="exp-no"><span data-i18n="cesm2.no">Experiment II</span> <span class="exp-meta" data-i18n="cesm2.meta">· Yonsei University</span></p>
           <h2 id="cesm2-t" data-i18n="cesm2.title">CESM2 Net-Zero and Net-Negative Experiments</h2>
           <p class="plate-sub" data-i18n="cesm2.sub">Climate responses and extremes under net-zero and net-negative CO₂ emission pathways.</p>
         </div>
-        <svg class="pathway" viewBox="0 0 128 64" aria-hidden="true">
-          <line class="ax" x1="6" y1="6" x2="6" y2="58"/>
-          <line class="zero" x1="6" y1="34" x2="124" y2="34"/>
-          <path class="co2" d="M6 22C24 10 36 8 48 16S64 34 70 34 88 48 100 48H124"/>
-          <text x="72" y="29" data-i18n="path.nz">net zero</text>
-          <text x="126" y="62" text-anchor="end" data-i18n="path.nn">net negative</text>
-        </svg>
       </div>
-      <ul class="legend">
-        <li class="lg-co"><i></i><span data-i18n="lg.co">Co-authored (published)</span></li>
-        <li class="lg-exp"><i></i><span data-i18n="lg.exp">Used the experiment (not co-authored)</span></li>
-        <li class="lg-sub"><i></i><span data-i18n="lg.sub">Submitted / under review</span></li>
-      </ul>
+      <div class="key">
+        <svg class="pathway" viewBox="0 0 232 96" aria-hidden="true">
+          <text class="axl" x="2" y="10" data-i18n="path.emis">CO₂ emissions</text>
+          <path class="area-up" d="M26 46V34C40 22 50 15 62 16S96 32 110 46Z"/><path class="area-down" d="M110 46C122 60 132 76 150 76S176 60 190 46Z"/>
+          <line class="ax" x1="26" y1="14" x2="26" y2="84"/>
+          <line class="zero" x1="26" y1="46" x2="228" y2="46"/><text class="pk" x="21" y="49" text-anchor="end">0</text>
+          <path class="seg seg-up" d="M26 34C40 22 50 15 62 16S96 32 110 46"/>
+          <path class="seg seg-down" d="M110 46C122 60 132 76 150 76S176 60 190 46H228"/>
+          <path class="seg seg-nz" d="M110 46H228"/>
+          <text class="ph ph-nz" x="226" y="40" text-anchor="end" data-i18n="path.nz">net zero</text>
+          <text class="ph ph-down" x="150" y="91" text-anchor="middle" data-i18n="path.nn">net negative</text>
+        </svg>
+        <div class="key-side">
+          <ul class="legend">
+            <li class="lg-co"><i></i><span data-i18n="lg.co">Co-authored (published)</span></li>
+            <li class="lg-exp"><i></i><span data-i18n="lg.exp">Used the experiment (not co-authored)</span></li>
+            <li class="lg-sub"><i></i><span data-i18n="lg.sub">Submitted / under review</span></li>
+          </ul>
+          <p class="map-hint"><span class="hint-wide" data-i18n="map.hint">Click an icon to open its papers. Click a citation to read the paper.</span><span class="hint-narrow" data-i18n="map.hint.touch">Swipe sideways to see the whole map. Tap an icon to list its papers.</span></p>
+        </div>
+      </div>
     </div>
     <div class="map" data-map-host="cesm2" aria-label="Map of studies that used the CESM2 net-zero and net-negative experiments"></div>
-    <p class="map-hint"><span class="hint-wide" data-i18n="map.hint">Click a region to open its papers. Click a citation to read the paper.</span><span class="hint-narrow" data-i18n="map.hint.touch">Swipe sideways to see the whole map. Tap a region to list its papers.</span></p>
-    <div class="sheet" data-sheet hidden role="dialog" aria-label="Papers">
+    <div class="sheet" data-sheet hidden role="dialog" aria-modal="true" aria-labelledby="sheet-cesm2">
       <div class="sheet-head"><h3></h3><button class="sheet-close" type="button" data-i18n="map.close">Close</button></div>
       <ol></ol>
     </div>
@@ -90,7 +118,7 @@
 </main>
 
 <footer class="foot">
-  <span>Jongsoo Shin · <span data-i18n="brand.affil">Researcher · School of Earth and Environmental Sciences, Seoul National University</span></span>
+  <span>Jongsoo Shin · <span data-i18n="brand.affil">Research Assistant Professor · School of Earth and Environmental Sciences, Seoul National University</span></span>
   <span>jongsooshin5@gmail.com · jongsoo.shin@whoi.edu</span>
   <span>Map: Natural Earth 1:110m · <span data-i18n="foot.updated">Last updated</span> 2026-11-04</span>
 </footer>

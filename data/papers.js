@@ -6,7 +6,7 @@ window.SITE_REGIONS = {
    "name": "Arctic",
    "ll": [
     20,
-    79
+    76
    ],
    "icon": "ice"
   },
@@ -95,8 +95,8 @@ window.SITE_REGIONS = {
    "id": "hadley",
    "name": "Subtropics",
    "ll": [
-    -30,
-    -27
+    -24,
+    -30
    ],
    "icon": "arrow"
   },
@@ -160,8 +160,8 @@ window.SITE_REGIONS = {
    "id": "eastasia",
    "name": "East Asia",
    "ll": [
-    122,
-    34
+    118,
+    37
    ],
    "icon": "drop"
   },
@@ -169,8 +169,8 @@ window.SITE_REGIONS = {
    "id": "tc",
    "name": "Tropical cyclones",
    "ll": [
-    142,
-    14
+    146,
+    10
    ],
    "icon": "wind"
   },
