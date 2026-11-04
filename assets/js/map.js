@@ -1,10 +1,9 @@
 /* 실험별 연구 지도 — d3-geo Natural Earth 투영 + Natural Earth 110m 육지(assets/vendor/world-110m.js).
    데이터: window.SITE_REGIONS[map] (지역 허브), window.PAPERS (논문). 둘 다 data/papers.js.
    - 지역 표지는 현상별 색 배지에 담은 도식 아이콘(강수=물방울, 순환=화살표 …)이다.
-   - 배지 바깥 고리는 논문 상태색이다: 허브는 공저/비공저/투고/준비 비율 호, 논문 1편 지점은 한 색 고리.
-   - 논문이 2편 이상인 지역 = 허브(아이콘 + 지역명 + 편수). 아이콘을 누르면 논문 가지가 펼쳐진다(마우스는 올리면 미리보기).
-     가지는 이웃 표지를 덜 덮는 쪽으로 펼친다.
-   - 논문이 1편인 지역 = 아이콘 하나(위: 주제, 아래: 1저자 et al. 연도 (저널)), 누르면 논문으로 이동.
+   - 배지 바깥 고리는 논문 상태색이다: 공저/비공저/투고/준비 비율 호.
+   - 모든 지역 = 허브(아이콘 + 지역명 + 편수, 논문 1편이어도 같음). 아이콘을 누르면 논문 가지가 펼쳐진다(마우스는 올리면 미리보기).
+     가지 끝은 주제 + 1저자 et al. 연도 (저널) 이고 DOI 링크다. 가지는 이웃 표지를 덜 덮는 쪽으로 펼친다.
    - 지도는 고정 설계 폭(DESIGN_MIN~MAX 단위)으로 그리고 SVG 를 그림처럼 늘리고 줄인다. 그래서 브라우저 확대·축소나
      큰 모니터에서 지도 속 라벨도 다른 글자와 같은 비율로 움직인다. 표시 폭은 담는 상자 폭과 '실험 제목 아래 남은 화면 높이에 들어가는 폭' 중 작은 값.
    - 지도 상자가 COMPACT_W 보다 좁으면(휴대폰·좁은 창) 라벨 없이 아이콘만 두고, 누르면 하단 시트에 목록을 띄운다.
@@ -164,42 +163,18 @@
     this.hubs = {};
     this.regions.forEach(function (r) {
       var list = this.byRegion[r.id];
-      if (!list || !list.length) return;
-      if (list.length === 1) this.drawPoint(r, list[0]);
-      else this.drawHub(r, list);
+      if (list && list.length) this.drawHub(r, list);
     }, this);
     this.sync();
     if (/[?&]debug\b/.test(location.search)) this.checkOverlap();
   };
 
-  // 논문 1편 지역: 아이콘 + 상태 고리 + 주제 + 인용 (전체가 논문 링크). 휴대폰에서는 아이콘만 두고 누르면 하단 목록.
-  MapView.prototype.drawPoint = function (r, p) {
-    var xy = this.proj(r.ll), x = xy[0], y = xy[1], k = kind(p), R = this.rPt, self = this;
-    var g = el('g', { 'class': 'pt k-' + k }, this.marks);
-    if (this.narrow()) {
-      g.setAttribute('role', 'button'); g.setAttribute('tabindex', '0');
-      g.setAttribute('aria-label', r.name + ': ' + p.topic);
-      el('circle', { 'class': 'stat-ring', cx: x, cy: y, r: R + 2.5 }, g);
-      el('circle', { 'class': 'focus-ring', cx: x, cy: y, r: R + 5 }, g);
-      badge(g, p.icon || r.icon, x, y, R);
-      el('circle', { cx: x, cy: y, r: R + 8, fill: 'transparent' }, g);
-      g.addEventListener('click', function (e) { e.stopPropagation(); self.openSheet(r, [p], g); });
-      g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); self.openSheet(r, [p], g); } });
-      return;
-    }
-    var a = href(p) ? el('a', { href: href(p), target: '_blank', rel: 'noopener' }, g) : el('g', null, g);
-    if (p.title) el('title', null, a).textContent = p.title;
-    el('circle', { 'class': 'stat-ring', cx: x, cy: y, r: R + 3.5 }, a);
-    el('circle', { 'class': 'focus-ring', cx: x, cy: y, r: R + 7 }, a);
-    badge(a, p.icon || r.icon, x, y, R);
-    labels(a, x + (r.lx || 0), y + (r.ly || 0), R + 3, p.topic, cite(p), 'lbl-topic', 'lbl-cite');
-  };
-
-  // 논문 2편 이상 지역: 허브 + 접힌 가지
+  // 지역 허브 + 접힌 가지 (논문 1편이어도 같은 방식)
   MapView.prototype.drawHub = function (r, list) {
     var xy = this.proj(r.ll), x = xy[0], y = xy[1], self = this;
+    var count = t(list.length === 1 ? 'map.paper' : 'map.papers', { n: list.length });
     var g = el('g', { 'class': 'hub', tabindex: '0', role: 'button', 'aria-expanded': 'false',
-      'aria-label': r.name + ', ' + t('map.papers', { n: list.length }) }, this.marks);
+      'aria-label': r.name + ', ' + count }, this.marks);
     // 가지는 맨 위 레이어에 따로 둔다(허브 노드를 옮기면 키보드 초점이 풀리므로 허브는 제자리에 둔다)
     var leaves = el('g', { 'class': 'leaves' }, this.top);
     var R = this.rHub, narrow = this.narrow();
@@ -212,7 +187,7 @@
       el('circle', { 'class': 'n-bubble', cx: bx, cy: by, r: 6 }, g);
       el('text', { 'class': 'n-text', x: bx, y: by + 3, 'text-anchor': 'middle' }, g).textContent = list.length;
     } else {
-      labels(g, x + (r.lx || 0), y + (r.ly || 0), R + 3, r.name, t('map.papers', { n: list.length }), 'lbl-hub', 'lbl-count');
+      labels(g, x + (r.lx || 0), y + (r.ly || 0), R + 3, r.name, count, 'lbl-hub', 'lbl-count');
     }
     var h = this.hubs[r.id] = { g: g, leaves: leaves, r: r, list: list, x: x, y: y, built: false };
 
