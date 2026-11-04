@@ -3,15 +3,15 @@
    natural height so no blank band above or below).
    Color roles: --co/--exp/--sub/--prep = paper status (labels, rings, branches); .cat-* = phenomenon (icon badges);
    --up/--down/--rest = CO₂ pathway phases. All text colors pass WCAG AA (4.5:1) on white and on the beige land.
-   Single light theme by design (white paper, pastel beige land), so every color is set explicitly here. */
+   Single light theme by design (white paper, pale blue sea, pastel beige land), so every color is set explicitly here. */
 :root {
   color-scheme: light;
   --paper: #ffffff;
-  --sea: #ffffff;
+  --sea: #e8f1f8;         /* pale blue ocean (page stays white) */
   --land: #f1e6cf;
   --land-edge: #c9b183;
-  --grat: #dbe7f0;        /* graticule on the sea */
-  --rim: #c4d6e4;         /* map outline */
+  --grat: #d3e1ec;        /* graticule on the sea */
+  --rim: #b7cde0;         /* map outline */
   --grid: #eef2f5;        /* hover wash in UI */
   --ink: #15212c;
   --muted: #4a5a66;
