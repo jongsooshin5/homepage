@@ -122,28 +122,27 @@
     }
     var narrow = this.narrow();
     var outline = SOUTH <= -89 ? { type: 'Sphere' } : d3.geoGraticule().extent([[-180, SOUTH], [180, 84]]).outline();
-    var W, H;
-    if (narrow) {
-      // 좁은 화면: 지도를 높이에 맞춰 크게 그리고 좌우로 밀어 보게 한다(라벨 크기 유지). 폭은 실제 지도 비율로 정해 빈 띠가 없다.
-      H = Math.max(320, Math.round(window.innerHeight * 0.62));
-      var nh = d3.geoPath(d3.geoNaturalEarth1().fitHeight(H - 4, outline)).bounds(outline);
-      W = Math.max(host.clientWidth, Math.ceil(nh[1][0] - nh[0][0]) + 4);
-    } else {
-      W = Math.max(320, host.clientWidth);
-      var nb = d3.geoPath(d3.geoNaturalEarth1().fitWidth(W - 4, outline)).bounds(outline);
+    // 폭에 맞춘 자연 높이. 넓은 화면은 '실험 제목 아래 남은 화면 높이'로 한 번 더 제한한다.
+    // 좁은 화면(휴대폰)은 세계 전체를 화면 폭에 맞춰 그리고, 글자 라벨 없이 작은 아이콘만 둔다(누르면 하단 목록).
+    var W = Math.max(narrow ? 200 : 320, host.clientWidth);
+    var nb = d3.geoPath(d3.geoNaturalEarth1().fitWidth(W - 4, outline)).bounds(outline);
+    var H = Math.ceil(nb[1][1] - nb[0][1]) + 4;
+    if (!narrow) {
       var plate = host.closest('.plate') || host.parentNode;
       var above = host.getBoundingClientRect().top - plate.getBoundingClientRect().top;
       var bar = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--bar-h')) || 60;
-      H = Math.max(320, Math.min(Math.ceil(nb[1][1] - nb[0][1]) + 4, window.innerHeight - bar - above - 16));
+      H = Math.max(320, Math.min(H, window.innerHeight - bar - above - 16));
     }
     host.style.height = H + 'px';
     this.W = W; this.H = H;
+    this.rHub = narrow ? 9 : R_HUB;
+    this.rPt = narrow ? 8 : R_PT;
     var proj = d3.geoNaturalEarth1().fitExtent([[2, 2], [W - 2, H - 2]], outline);
     var path = d3.geoPath(proj);
     this.proj = proj;
 
-    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'group', 'aria-label': host.getAttribute('aria-label') || '' }, host);
-    if (narrow) { svg.style.width = W + 'px'; svg.style.height = H + 'px'; }
+    var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'group', 'aria-label': host.getAttribute('aria-label') || '',
+      'class': narrow ? 'is-narrow' : null }, host);
     this.svg = svg;
     var cid = 'clip-' + this.key;
     var defs = el('defs', null, svg);
@@ -166,20 +165,30 @@
       else this.drawHub(r, list);
     }, this);
     this.sync();
-    if (narrow) host.scrollLeft = proj([100, 20])[0] - host.clientWidth / 2;   // 처음에는 아시아 쪽을 보여 준다
     if (/[?&]debug\b/.test(location.search)) this.checkOverlap();
   };
 
-  // 논문 1편 지역: 아이콘 + 상태 고리 + 주제 + 인용 (전체가 논문 링크)
+  // 논문 1편 지역: 아이콘 + 상태 고리 + 주제 + 인용 (전체가 논문 링크). 휴대폰에서는 아이콘만 두고 누르면 하단 목록.
   MapView.prototype.drawPoint = function (r, p) {
-    var xy = this.proj(r.ll), x = xy[0], y = xy[1], k = kind(p);
+    var xy = this.proj(r.ll), x = xy[0], y = xy[1], k = kind(p), R = this.rPt, self = this;
     var g = el('g', { 'class': 'pt k-' + k }, this.marks);
+    if (this.narrow()) {
+      g.setAttribute('role', 'button'); g.setAttribute('tabindex', '0');
+      g.setAttribute('aria-label', r.name + ': ' + p.topic);
+      el('circle', { 'class': 'stat-ring', cx: x, cy: y, r: R + 2.5 }, g);
+      el('circle', { 'class': 'focus-ring', cx: x, cy: y, r: R + 5 }, g);
+      badge(g, p.icon || r.icon, x, y, R);
+      el('circle', { cx: x, cy: y, r: R + 8, fill: 'transparent' }, g);
+      g.addEventListener('click', function (e) { e.stopPropagation(); self.openSheet(r, [p], g); });
+      g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); self.openSheet(r, [p], g); } });
+      return;
+    }
     var a = href(p) ? el('a', { href: href(p), target: '_blank', rel: 'noopener' }, g) : el('g', null, g);
     if (p.title) el('title', null, a).textContent = p.title;
-    el('circle', { 'class': 'stat-ring', cx: x, cy: y, r: R_PT + 3.5 }, a);
-    el('circle', { 'class': 'focus-ring', cx: x, cy: y, r: R_PT + 7 }, a);
-    badge(a, p.icon || r.icon, x, y, R_PT);
-    labels(a, x + (r.lx || 0), y + (r.ly || 0), R_PT + 3, p.topic, cite(p), 'lbl-topic', 'lbl-cite');
+    el('circle', { 'class': 'stat-ring', cx: x, cy: y, r: R + 3.5 }, a);
+    el('circle', { 'class': 'focus-ring', cx: x, cy: y, r: R + 7 }, a);
+    badge(a, p.icon || r.icon, x, y, R);
+    labels(a, x + (r.lx || 0), y + (r.ly || 0), R + 3, p.topic, cite(p), 'lbl-topic', 'lbl-cite');
   };
 
   // 논문 2편 이상 지역: 허브 + 접힌 가지
@@ -189,11 +198,18 @@
       'aria-label': r.name + ', ' + t('map.papers', { n: list.length }) }, this.marks);
     // 가지는 맨 위 레이어에 따로 둔다(허브 노드를 옮기면 키보드 초점이 풀리므로 허브는 제자리에 둔다)
     var leaves = el('g', { 'class': 'leaves' }, this.top);
-    statusArcs(g, list, x, y, R_HUB + 4.5);
-    el('circle', { 'class': 'focus-ring', cx: x, cy: y, r: R_HUB + 9 }, g);
-    badge(g, r.icon, x, y, R_HUB);
-    el('circle', { cx: x, cy: y, r: R_HUB + 6, fill: 'transparent' }, g);   // 누르기 쉬운 영역
-    labels(g, x + (r.lx || 0), y + (r.ly || 0), R_HUB + 3, r.name, t('map.papers', { n: list.length }), 'lbl-hub', 'lbl-count');
+    var R = this.rHub, narrow = this.narrow();
+    statusArcs(g, list, x, y, R + (narrow ? 3 : 4.5));
+    el('circle', { 'class': 'focus-ring', cx: x, cy: y, r: R + (narrow ? 6 : 9) }, g);
+    badge(g, r.icon, x, y, R);
+    el('circle', { cx: x, cy: y, r: R + (narrow ? 9 : 6), fill: 'transparent' }, g);   // 누르기 쉬운 영역
+    if (narrow) {                                                     // 휴대폰: 라벨 대신 편수 숫자 방울
+      var bx = x + R * 0.85, by = y - R * 0.85;
+      el('circle', { 'class': 'n-bubble', cx: bx, cy: by, r: 6 }, g);
+      el('text', { 'class': 'n-text', x: bx, y: by + 3, 'text-anchor': 'middle' }, g).textContent = list.length;
+    } else {
+      labels(g, x + (r.lx || 0), y + (r.ly || 0), R + 3, r.name, t('map.papers', { n: list.length }), 'lbl-hub', 'lbl-count');
+    }
     var h = this.hubs[r.id] = { g: g, leaves: leaves, r: r, list: list, x: x, y: y, built: false };
 
     // 마우스: 허브나 가지 위에 있으면 미리보기, 둘 다 벗어나면 잠시 뒤 닫는다
@@ -302,7 +318,7 @@
 
   MapView.prototype.narrow = function () { return window.matchMedia && window.matchMedia(NARROW).matches; };
   MapView.prototype.toggle = function (id, opener) {
-    if (this.narrow()) { this.openSheet(id, opener); return; }
+    if (this.narrow()) { var h = this.hubs[id]; if (h) this.openSheet(h.r, h.list, opener || h.g); return; }
     this.setPinned(this.pinned === id ? null : id);
   };
   MapView.prototype.setPinned = function (id) { this.pinned = id; this.preview = null; this.sync(); };
@@ -320,14 +336,15 @@
     this.svg && this.svg.classList.toggle('has-open', !!open);
   };
 
-  MapView.prototype.openSheet = function (id, opener) {
-    var h = this.hubs[id], sh = this.sheet;
-    if (!h || !sh) return;
+  // 하단 목록 시트: 지역 이름 + 논문(주제, 인용 링크)
+  MapView.prototype.openSheet = function (r, list, opener) {
+    var sh = this.sheet;
+    if (!sh) return;
     closeSheets();                                                    // 다른 지도의 시트가 열려 있으면 닫는다
-    sh.querySelector('h3').textContent = h.r.name;
+    sh.querySelector('h3').textContent = r.name;
     var ol = sh.querySelector('ol');
     ol.innerHTML = '';
-    h.list.forEach(function (p) {
+    list.forEach(function (p) {
       var li = document.createElement('li');
       li.className = 'k-' + kind(p);
       var tp = document.createElement('span'); tp.className = 's-topic'; tp.textContent = p.topic;
@@ -335,7 +352,7 @@
       if (href(p)) { c.href = href(p); c.target = '_blank'; c.rel = 'noopener'; }
       li.appendChild(tp); li.appendChild(c); ol.appendChild(li);
     });
-    sh._opener = opener || h.g;
+    sh._opener = opener;
     sh.hidden = false;
     sh.querySelector('.sheet-close').focus();
   };

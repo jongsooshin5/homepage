@@ -327,11 +327,18 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .foot a { color: var(--ink); }
 
 @media (max-width: 720px) {
-  .map { overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; }
   .intro-photo { width: 72px; height: 72px; }
   .intro-name { font-size: 1.35rem; }
-  .map > svg { position: static; display: block; }
 }
+/* 휴대폰 지도: 세계 전체를 폭에 맞추고 아이콘만, 허브에는 편수 숫자 방울 */
+.is-narrow .stat-arc { stroke-width: 2.2; }
+.is-narrow .stat-ring { stroke-width: 2; }
+.is-narrow .badge-bg { stroke-width: 1.5; }
+.n-bubble { fill: #fff; stroke: var(--ink); stroke-width: 1; }
+.n-text { font: 700 8.5px var(--label); fill: var(--ink); }
+.is-narrow .pt { cursor: pointer; }
+.is-narrow .pt:focus { outline: none; }
+.is-narrow .pt:focus-visible .focus-ring { stroke: var(--focus); }
 @media (max-width: 900px) {
   .bar-exp { display: none; }
   .bar-nav { margin-left: auto; border-left: 0; padding-left: 0; }
