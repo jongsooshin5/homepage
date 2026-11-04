@@ -6,7 +6,7 @@
      가지 끝은 주제 + 1저자 et al. 연도 (저널) 이고 DOI 링크다. 가지는 이웃 표지를 덜 덮는 쪽으로 펼친다.
    - 지도는 고정 설계 폭(DESIGN_MIN~MAX 단위)으로 그리고 SVG 를 그림처럼 늘리고 줄인다. 그래서 브라우저 확대·축소나
      큰 모니터에서 지도 속 라벨도 다른 글자와 같은 비율로 움직인다. 표시 폭은 담는 상자 폭과 '실험 제목 아래 남은 화면 높이에 들어가는 폭' 중 작은 값.
-   - 지도 상자가 COMPACT_W 보다 좁으면(휴대폰·좁은 창) 라벨 없이 아이콘만 두고, 누르면 하단 시트에 목록을 띄운다.
+   - 지도 상자가 COMPACT_W 보다 좁으면(휴대폰·좁은 창) 작은 지역 이름과 편수 숫자만 두고, 누르면 하단 시트에 목록을 띄운다.
    ?debug 를 붙이면 평상시 라벨끼리 겹치는 곳을 콘솔에 찍는다. */
 (function () {
   'use strict';
@@ -165,6 +165,7 @@
       var list = this.byRegion[r.id];
       if (list && list.length) this.drawHub(r, list);
     }, this);
+    if (narrow) this.placeCompactLabels();
     this.sync();
     if (/[?&]debug\b/.test(location.search)) this.checkOverlap();
   };
@@ -182,7 +183,7 @@
     el('circle', { 'class': 'focus-ring', cx: x, cy: y, r: R + (narrow ? 6 : 9) }, g);
     badge(g, r.icon, x, y, R);
     el('circle', { cx: x, cy: y, r: R + (narrow ? 9 : 6), fill: 'transparent' }, g);   // 누르기 쉬운 영역
-    if (narrow) {                                                     // 휴대폰: 라벨 대신 편수 숫자 방울
+    if (narrow) {                                                     // 좁은 화면: 편수 숫자 방울 (지역 이름은 placeCompactLabels 가 배치)
       var bx = x + R * 0.85, by = y - R * 0.85;
       el('circle', { 'class': 'n-bubble', cx: bx, cy: by, r: 6 }, g);
       el('text', { 'class': 'n-text', x: bx, y: by + 3, 'text-anchor': 'middle' }, g).textContent = list.length;
@@ -229,6 +230,30 @@
       }
     });
     return h;
+  };
+
+  // 좁은 화면의 지역 이름: 작은 글씨로 아이콘 아래·위·오른쪽·왼쪽 중 다른 아이콘·이름과 겹치지 않고 지도 안에 드는 첫 자리에 둔다.
+  // 아주 좁으면(600px 미만) 줄임 이름(short)을 쓴다. 논문이 많은 지역부터 자리를 잡는다.
+  MapView.prototype.placeCompactLabels = function () {
+    var W = this.W, H = this.H, R = this.rHub, fs = W < 600 ? 9.5 : 11, useShort = W < 600;
+    var hubs = [], obs = [];
+    for (var id in this.hubs) hubs.push(this.hubs[id]);
+    hubs.forEach(function (h) { obs.push({ x: h.x - R - 4, y: h.y - R - 7, width: 2 * R + 11, height: 2 * R + 11 }); });
+    hubs.sort(function (a, b) { return b.list.length - a.list.length; });
+    hubs.forEach(function (h) {
+      var name = (useShort && h.r.short) || h.r.name, best = null;
+      var cands = [[h.x, h.y + R + 3 + fs, 'middle'], [h.x, h.y - R - 9, 'middle'], [h.x + R + 4, h.y + fs * .35, 'start'], [h.x - R - 4, h.y + fs * .35, 'end']];
+      for (var i = 0; i < cands.length; i++) {
+        var tx = el('text', { 'class': 'lbl lbl-hub lbl-compact', x: cands[i][0], y: cands[i][1], 'text-anchor': cands[i][2] }, h.g);
+        tx.style.fontSize = fs + 'px';
+        tx.textContent = name;
+        var b = tx.getBBox(), cost = (b.x < 1 || b.y < 1 || b.x + b.width > W - 1 || b.y + b.height > H - 1) ? 100 : 0;
+        obs.forEach(function (o) { if (hit(b, o)) cost++; });
+        if (!best || cost < best.cost) { if (best) best.el.remove(); best = { el: tx, b: b, cost: cost }; } else tx.remove();
+        if (cost === 0) break;
+      }
+      obs.push(best.b);
+    });
   };
 
   // 표지(다른 허브·지점) 상자: 가지가 덜 덮는 쪽을 고를 때 쓴다

@@ -4,6 +4,7 @@ window.SITE_REGIONS = {
   {
    "id": "arctic",
    "name": "Arctic",
+   "short": "Arctic",
    "ll": [
     20,
     76
@@ -13,6 +14,7 @@ window.SITE_REGIONS = {
   {
    "id": "natl",
    "name": "North Atlantic",
+   "short": "N. Atlantic",
    "ll": [
     -38,
     47
@@ -22,6 +24,7 @@ window.SITE_REGIONS = {
   {
    "id": "europe",
    "name": "Europe",
+   "short": "Europe",
    "ll": [
     12,
     49
@@ -31,6 +34,7 @@ window.SITE_REGIONS = {
   {
    "id": "eastasia",
    "name": "East Asia",
+   "short": "East Asia",
    "ll": [
     118,
     33
@@ -40,6 +44,7 @@ window.SITE_REGIONS = {
   {
    "id": "monsoon",
    "name": "Monsoon",
+   "short": "Monsoon",
    "ll": [
     79,
     21
@@ -49,6 +54,7 @@ window.SITE_REGIONS = {
   {
    "id": "indian",
    "name": "Indian Ocean",
+   "short": "Indian Ocean",
    "ll": [
     75,
     -12
@@ -58,6 +64,7 @@ window.SITE_REGIONS = {
   {
    "id": "tpac",
    "name": "Tropical Pacific",
+   "short": "Trop. Pacific",
    "ll": [
     -140,
     0
@@ -67,6 +74,7 @@ window.SITE_REGIONS = {
   {
    "id": "npac",
    "name": "North Pacific",
+   "short": "N. Pacific",
    "ll": [
     163,
     41
@@ -76,6 +84,7 @@ window.SITE_REGIONS = {
   {
    "id": "tc",
    "name": "Tropical cyclones",
+   "short": "Cyclones",
    "ll": [
     142,
     12
@@ -85,6 +94,7 @@ window.SITE_REGIONS = {
   {
    "id": "tatl",
    "name": "Tropical Atlantic",
+   "short": "Trop. Atlantic",
    "ll": [
     -30,
     5
@@ -94,6 +104,7 @@ window.SITE_REGIONS = {
   {
    "id": "hadley",
    "name": "Subtropics",
+   "short": "Subtropics",
    "ll": [
     -20,
     -33
@@ -103,6 +114,7 @@ window.SITE_REGIONS = {
   {
    "id": "amazon",
    "name": "South America",
+   "short": "S. America",
    "ll": [
     -62,
     -6
@@ -112,6 +124,7 @@ window.SITE_REGIONS = {
   {
    "id": "southern",
    "name": "Southern Ocean",
+   "short": "S. Ocean",
    "ll": [
     20,
     -57
@@ -121,6 +134,7 @@ window.SITE_REGIONS = {
   {
    "id": "global",
    "name": "Global",
+   "short": "Global",
    "ll": [
     -120,
     -35
@@ -132,6 +146,7 @@ window.SITE_REGIONS = {
   {
    "id": "permafrost",
    "name": "Permafrost",
+   "short": "Permafrost",
    "ll": [
     105,
     64
@@ -141,6 +156,7 @@ window.SITE_REGIONS = {
   {
    "id": "natl",
    "name": "North Atlantic",
+   "short": "N. Atlantic",
    "ll": [
     -35,
     52
@@ -150,6 +166,7 @@ window.SITE_REGIONS = {
   {
    "id": "africa",
    "name": "Africa drylands",
+   "short": "Africa",
    "ll": [
     18,
     8
@@ -159,6 +176,7 @@ window.SITE_REGIONS = {
   {
    "id": "eastasia",
    "name": "East Asia",
+   "short": "East Asia",
    "ll": [
     118,
     37
@@ -168,6 +186,7 @@ window.SITE_REGIONS = {
   {
    "id": "tc",
    "name": "Tropical cyclones",
+   "short": "Cyclones",
    "ll": [
     146,
     10
@@ -177,6 +196,7 @@ window.SITE_REGIONS = {
   {
    "id": "tpac",
    "name": "Tropical Pacific",
+   "short": "Trop. Pacific",
    "ll": [
     -140,
     0
@@ -186,6 +206,7 @@ window.SITE_REGIONS = {
   {
    "id": "southern",
    "name": "Southern Ocean",
+   "short": "S. Ocean",
    "ll": [
     10,
     -56
@@ -195,6 +216,7 @@ window.SITE_REGIONS = {
   {
    "id": "global",
    "name": "Global",
+   "short": "Global",
    "ll": [
     -120,
     -35
