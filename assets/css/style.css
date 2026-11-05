@@ -101,6 +101,20 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .intro-contact span { user-select: all; }
 .intro-contact a { color: var(--accent); font-weight: 600; text-decoration: none; }
 .intro-contact a:hover { text-decoration: underline; }
+/* 논문 수 한 줄: 소개 아래 전체 폭, 세로선으로 구분 (휴대폰은 2×2 칸).
+   위에도 아래 구분선과 같은 굵은 선을 긋고, 소개의 좌우 여백만큼 밖으로 늘려 두 선 길이를 맞춘다. */
+.intro-stats {
+  flex: 1 1 100%; display: flex; flex-wrap: wrap; margin: 0; padding: 0; list-style: none;
+  font: 400 .95rem/1.2 var(--label); color: var(--muted);
+  border-top: 3px solid var(--rule); padding-top: 12px;
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
+}
+.intro-stats li { padding: 2px 18px; border-left: 1px solid var(--line); }
+.intro-stats li:first-child { padding-left: 0; border-left: 0; }
+.intro-stats a { display: inline-flex; align-items: baseline; gap: 7px; color: inherit; text-decoration: none; }
+.intro-stats a:hover span { text-decoration: underline; }
+.intro-stats b { font: 600 1.45rem/1 var(--display); color: var(--accent); }
 .ri-title {
   margin: 0 auto; padding-block: 14px 0; max-width: var(--maxw);
   padding-left: max(16px, env(safe-area-inset-left, 0px));
@@ -342,6 +356,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @media (max-width: 720px) {
   .intro-photo { width: 72px; height: 72px; }
   .intro-name { font-size: 1.35rem; }
+  .intro-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .intro-stats li, .intro-stats li:first-child { padding: 7px 10px; border: 0; border-radius: 6px; background: var(--wash); }
+  .intro-stats a { flex-direction: column-reverse; align-items: flex-start; gap: 3px; font-size: .84rem; }
 }
 /* 휴대폰 지도: 세계 전체를 폭에 맞추고 아이콘만, 허브에는 편수 숫자 방울 */
 .is-narrow .stat-arc { stroke-width: 2.2; }
