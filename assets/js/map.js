@@ -3,7 +3,9 @@
    - 지역 표지는 현상별 색 배지에 담은 도식 아이콘(강수=물방울, 순환=화살표 …)이다.
    - 배지 바깥 고리는 논문 상태색이다: 공저/비공저/투고/준비 비율 호.
    - 모든 지역 = 허브(아이콘 + 지역명 + 편수, 논문 1편이어도 같음). 아이콘을 누르면 논문 가지가 펼쳐진다(마우스는 올리면 미리보기).
-     가지 끝은 주제 + 1저자 et al. 연도 (저널) 이고 DOI 링크다. 가지는 이웃 표지를 덜 덮는 쪽으로 펼친다.
+     가지 끝은 주제 + 1저자 et al. 연도 (저널) 이다. 누르면 논문 창(그림 1장, Key points 3개, 참고문헌·DOI)이 뜬다.
+     창 내용은 data/details.js (research/build_details.py 가 만듦). DOI 는 창 아래 참고문헌에만 있다.
+     가지는 이웃 표지를 덜 덮는 쪽으로 펼친다.
    - 지도는 고정 설계 폭(DESIGN_MIN~MAX 단위)으로 그리고 SVG 를 그림처럼 늘리고 줄인다. 그래서 브라우저 확대·축소나
      큰 모니터에서 지도 속 라벨도 다른 글자와 같은 비율로 움직인다. 표시 폭은 담는 상자 폭과 '실험 제목 아래 남은 화면 높이에 들어가는 폭' 중 작은 값.
    - 지도 상자가 COMPACT_W 보다 좁으면(휴대폰·좁은 창) 작은 지역 이름과 편수 숫자만 두고, 누르면 하단 시트에 목록을 띄운다.
@@ -204,7 +206,7 @@
       self.closeTimer = setTimeout(function () { if (self.preview === r.id) { self.preview = null; self.sync(); } }, 140);
     }
     function click(e) {
-      if (e.target.closest && e.target.closest('a')) return;      // 인용 링크는 그대로 이동
+      if (e.target.closest && e.target.closest('.leaf-hit')) return;   // 가지 끝 논문은 자기 동작(창 열기)만
       e.stopPropagation();
       self.toggle(r.id, g);
     }
@@ -218,11 +220,11 @@
       if (e.target !== g || (e.key !== 'Enter' && e.key !== ' ')) return;
       e.preventDefault();
       self.toggle(r.id, g);
-      if (self.pinned === r.id) { var a = leaves.querySelector('a'); if (a) a.focus(); }
+      if (self.pinned === r.id) { var a = leaves.querySelector('.leaf-hit'); if (a) a.focus(); }
     });
     leaves.addEventListener('keydown', function (e) {
       if (e.key !== 'Tab') return;
-      var links = leaves.querySelectorAll('a');
+      var links = leaves.querySelectorAll('.leaf-hit');
       if (!links.length) return;
       if ((!e.shiftKey && e.target === links[links.length - 1]) || (e.shiftKey && e.target === links[0])) {
         e.preventDefault();
@@ -290,7 +292,7 @@
   };
 
   MapView.prototype.layoutLeaves = function (h, cols) {
-    var leaves = h.leaves, list = h.list, r = h.r, H = this.H;
+    var leaves = h.leaves, list = h.list, r = h.r, H = this.H, self = this;
     leaves.innerHTML = '';
     var groups = cols.map(function () { return []; });
     list.forEach(function (p, i) { groups[i % cols.length].push(p); });
@@ -309,7 +311,21 @@
         if (k === 'exp') el('circle', { 'class': 'leaf-dot-exp', cx: x, cy: y, r: 3.4 }, lg);
         else el('circle', { cx: x, cy: y, r: 3.6 }, lg);
         var anchor = s > 0 ? 'start' : 'end', tx = x + s * 8;
-        var a = href(p) ? el('a', { href: href(p), target: '_blank', rel: 'noopener' }, lg) : el('g', null, lg);
+        // 논문 창이 있는 논문은 링크가 아니라 버튼이다(누르면 창만 뜬다). 창이 없는 논문만 DOI 링크로 둔다.
+        var a;
+        if (details(p)) {
+          a = el('g', { 'class': 'leaf-hit', tabindex: '0', role: 'button', 'aria-haspopup': 'dialog', 'data-id': p.id }, lg);
+          var go = function () {
+            if (self.pinned !== h.r.id) self.setPinned(h.r.id);     // 창을 닫은 뒤에도 가지가 남아 초점이 돌아올 곳이 있게
+            openPaper(p, a);
+          };
+          a.addEventListener('click', go);
+          a.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+        } else if (href(p)) {
+          a = el('a', { 'class': 'leaf-hit', href: href(p), target: '_blank', rel: 'noopener', 'data-id': p.id }, lg);
+        } else {
+          a = el('g', null, lg);
+        }
         if (p.title) el('title', null, a).textContent = p.title;
         text(a, 'lbl-topic', tx, y - 3, p.topic, anchor);
         text(a, 'lbl-cite', tx, y + 11, cite(p), anchor);
@@ -352,8 +368,12 @@
       var li = document.createElement('li');
       li.className = 'k-' + kind(p);
       var tp = document.createElement('span'); tp.className = 's-topic'; tp.textContent = p.topic;
-      var c = document.createElement(href(p) ? 'a' : 'span'); c.className = 's-cite'; c.textContent = cite(p);
-      if (href(p)) { c.href = href(p); c.target = '_blank'; c.rel = 'noopener'; }
+      var c = document.createElement(details(p) ? 'button' : href(p) ? 'a' : 'span');
+      c.className = 's-cite'; c.textContent = cite(p); c.setAttribute('data-id', p.id);
+      if (details(p)) {                                              // 누르면 논문 창 (DOI 는 창 안 참고문헌에)
+        c.type = 'button'; c.setAttribute('aria-haspopup', 'dialog');
+        c.addEventListener('click', function () { openPaper(p, c); });
+      } else if (href(p)) { c.href = href(p); c.target = '_blank'; c.rel = 'noopener'; }
       li.appendChild(tp); li.appendChild(c); ol.appendChild(li);
     });
     sh._opener = opener;
@@ -367,6 +387,81 @@
       sh.hidden = true;
       if (restore && sh._opener) sh._opener.focus();
     });
+  }
+
+  // ------------------------------------------------------------------ 논문 창: 그림 1장 + Key points 3개 + 참고문헌(DOI)
+  // 그림은 CC 라이선스 논문만 싣는다. 출판사 저작권 논문은 그림 자리에 안내 문구와 저널 링크를 둔다.
+  var pop = null, popPaper = null;
+  function details(p) { return (window.PAPER_DETAILS || {})[p.id] || null; }
+  function popup() {
+    if (pop) return pop;
+    pop = document.createElement('dialog');
+    pop.className = 'pp';
+    pop.setAttribute('aria-labelledby', 'pp-title');
+    pop.tabIndex = -1;                                                // 열면 창 자체에 초점(닫기 버튼에 굵은 초점 테두리가 생기지 않게)
+    pop.innerHTML =
+      '<div class="pp-head"><p class="pp-kicker"><span class="pp-tag"></span><span class="pp-topic"></span></p>' +
+      '<button class="pp-close sheet-close" type="button"><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg><span></span></button>' +
+      '<h3 id="pp-title"></h3></div>' +
+      '<div class="pp-body">' +
+      '<figure class="pp-fig"><a class="pp-img" target="_blank" rel="noopener"><img alt="" decoding="async"></a>' +
+      '<figcaption><b class="pp-figlabel"></b> <span class="pp-figcap"></span> <a class="pp-lic" target="_blank" rel="noopener license"></a></figcaption></figure>' +
+      '<p class="pp-nofig"><span></span> <a target="_blank" rel="noopener"></a></p>' +
+      '<section><h4 class="pp-kp-h"></h4><ol class="pp-kp"></ol></section>' +
+      '<section><h4 class="pp-ref-h"></h4><p class="pp-ref"></p></section></div>';
+    document.body.appendChild(pop);
+    pop.querySelector('.pp-close').addEventListener('click', function () { pop.close(); });
+    pop.addEventListener('click', function (e) { if (e.target === pop) pop.close(); });    // 어두운 바깥을 누르면 닫기
+    pop.addEventListener('close', function () {
+      if (pop._opener && document.contains(pop._opener)) pop._opener.focus();
+      popPaper = null;
+    });
+    return pop;
+  }
+  function renderPop() {
+    var p = popPaper, d = details(p), k = kind(p), ko = window.I18N && window.I18N.lang === 'ko';
+    function q(sel) { return pop.querySelector(sel); }
+    q('.pp-tag').className = 'pp-tag k-' + k;
+    q('.pp-tag').textContent = t('lg.' + k);
+    q('.pp-topic').textContent = p.topic;
+    q('#pp-title').textContent = p.title.replace(/\bCO2\b/g, 'CO₂');
+    q('.pp-close span').textContent = t('map.close');
+    q('.pp-fig').hidden = !d.fig;
+    q('.pp-nofig').hidden = !!d.fig;
+    if (d.fig) {
+      var img = q('.pp-fig img');
+      img.width = d.fig_w; img.height = d.fig_h;                       // 그림이 받아지기 전에도 자리를 잡아 둔다
+      img.src = d.fig;
+      img.alt = d.fig_label + '. ' + d.fig_caption;
+      q('.pp-img').href = d.fig;
+      q('.pp-img').title = t('pp.enlarge');
+      q('.pp-figlabel').textContent = d.fig_label + '.';
+      q('.pp-figcap').textContent = d.fig_caption;
+      q('.pp-lic').textContent = t('pp.figfrom') + ' ' + p.first_author + ' et al. (' + p.year + '), ' + d.license;
+      q('.pp-lic').href = d.license_url;
+    } else {
+      q('.pp-nofig span').textContent = t(d.license === 'publisher' ? 'pp.nofig' : 'pp.nofig.other');
+      q('.pp-nofig a').textContent = t('pp.viewfig');
+      q('.pp-nofig a').href = href(p);
+    }
+    q('.pp-kp-h').textContent = t('pp.kp');
+    var ol = q('.pp-kp');
+    ol.innerHTML = '';
+    (ko ? d.kp_ko : d.kp_en).forEach(function (s) {
+      var li = document.createElement('li'); li.textContent = s; ol.appendChild(li);
+    });
+    q('.pp-ref-h').textContent = t('pp.ref');
+    q('.pp-ref').innerHTML = d.ref;                                    // build_details.py 가 escape 해서 만든 HTML
+  }
+  function openPaper(p, opener) {
+    if (!details(p)) return;
+    popup();
+    popPaper = p;
+    pop._opener = opener;
+    renderPop();
+    if (!pop.open) pop.showModal();
+    pop.scrollTop = 0;
+    pop.focus();
   }
 
   // 평상시(가지를 접은 상태) 라벨·배지 겹침 검사 — 개발용
@@ -398,7 +493,7 @@
       sh.querySelector('.sheet-close').addEventListener('click', function () { closeSheets(true); });
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key !== 'Escape') return;
+      if (e.key !== 'Escape' || (pop && pop.open)) return;        // 논문 창의 Esc 는 창만 닫는다(dialog 가 처리)
       var act = document.activeElement, back = null;
       views.forEach(function (v) {
         for (var id in v.hubs) if (v.hubs[id].leaves.contains(act)) back = v.hubs[id].g;   // 가지 안에서 Esc → 그 허브로
@@ -414,7 +509,10 @@
       clearTimeout(timer);
       timer = setTimeout(function () { views.forEach(function (v) { v.draw(); }); }, 150);
     });
-    document.addEventListener('langchange', function () { views.forEach(function (v) { v.draw(); }); });
+    document.addEventListener('langchange', function () {
+      views.forEach(function (v) { v.draw(); });
+      if (pop && pop.open) renderPop();
+    });
 
     // 상단 실험 탭: 보이는 지도 표시
     var tabs = document.querySelectorAll('.bar-exp a');
