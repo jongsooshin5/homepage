@@ -181,6 +181,23 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .is-compact .hint-wide { display: none; } .is-compact .hint-narrow { display: inline; }
 .map-empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: .9rem; }
 
+/* ---------------------------------------------------------------- cite & acknowledge (지도 아래, 접힌 상태가 기본) */
+.cite { margin-top: 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--wash); }
+.cite > summary { cursor: pointer; padding: 10px 14px; font: 600 .95rem/1.4 var(--body); color: var(--accent); }
+.cite > summary:hover { background: var(--grid); border-radius: 10px; }
+.cite[open] > summary { border-bottom: 1px solid var(--line); border-radius: 10px 10px 0 0; }
+.cite-body { display: grid; gap: 8px; }
+.cite-body { padding: 4px 14px 14px; }
+.cite-h { margin: 6px 0 0; font: 600 .84rem/1.3 var(--label); color: var(--muted); }
+.cite-ref { margin: 0; max-width: 100ch; font-size: .9rem; }
+.cite-ref a { color: var(--accent); overflow-wrap: anywhere; }
+.ack { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; }
+.ack-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; font: 600 .84rem/1.3 var(--label); }
+.ack p { margin: 4px 0 0; max-width: 100ch; font-size: .88rem; line-height: 1.55; }
+.ack-copy { min-height: 32px; padding: 4px 12px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); font: 600 .82rem var(--body); color: var(--accent); cursor: pointer; }
+.ack-copy:hover { background: var(--tint); }
+.cite-note { margin: 2px 0 0; font-size: .84rem; color: var(--muted); }
+
 /* ---------------------------------------------------------------- map marks */
 .m-sphere { fill: var(--sea); }
 .m-rim { fill: none; stroke: var(--rim); stroke-width: 1.2; }
@@ -386,6 +403,32 @@ html:has(dialog.pp[open]) { overflow: hidden; }
 .chip:hover { border-color: var(--ink); }
 .chip-cesm1 { color: var(--accent); background: var(--tint); border-color: #c5d8ea; }
 .chip-cesm2 { color: var(--rest); background: #e6f1e7; border-color: #c6dfc9; }
+/* 목록 페이지 사이를 오가는 탭 (전체·CDR·Net-Zero·자매지 / 실험 I·II), 숫자는 편수 */
+.list-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.list-tabs a { display: inline-flex; align-items: baseline; gap: 6px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px;
+  font: 500 .86rem/1.3 var(--label); color: var(--muted); text-decoration: none; background: var(--paper); }
+.list-tabs a:hover { border-color: var(--accent); color: var(--accent); }
+.list-tabs a[aria-current="page"] { background: var(--tint); border-color: #c5d8ea; color: var(--accent); font-weight: 600; }
+.list-tabs b { font: 600 .95rem var(--display); color: var(--accent); }
+/* 자매지 페이지 위 저널 이름 */
+.journal-list { list-style: none; margin: 4px 0 2px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.journal-list li { padding: 8px 14px; border-radius: 8px; background: var(--wash); border: 1px solid var(--line); font-size: 1rem; }
+.journal-list b { margin-left: 6px; font: 600 1.05rem var(--display); color: var(--accent); }
+/* 지도 논문 목록: 범례 묶음(공저/비공저/투고/준비) */
+.pub-group { display: grid; gap: 12px; border-top: 2px solid var(--rule); padding-top: 14px; }
+.pub-group h2 { display: flex; align-items: center; gap: 8px; border-left: 0; padding-left: 0; margin: 0; font: 600 1.2rem/1.3 var(--display); }
+.pub-group h2 small { font: 500 .95rem var(--label); color: var(--muted); }
+.pub-group .dot { width: 11px; height: 11px; border-radius: 50%; background: var(--co); flex: 0 0 auto; }
+.pub-group.g-exp .dot { background: var(--paper); border: 2.5px solid var(--exp); }
+.pub-group.g-sub .dot { background: var(--sub); }
+.pub-group.g-prep .dot { background: var(--prep); }
+.pub-topic { display: inline-block; margin-left: 6px; padding: 0 7px; border-radius: 4px; background: var(--grid); font: 500 .74rem/1.7 var(--label); color: var(--ink); }
+.list-note { margin: 0; font-size: .92rem; color: var(--muted); }
+.list-note a { color: var(--accent); font-weight: 600; text-decoration: none; white-space: nowrap; }
+.list-note a:hover { text-decoration: underline; }
+/* 첫 화면 실험 설명 뒤 '(paper list)' */
+.list-link { color: var(--accent); font-weight: 600; text-decoration: none; white-space: nowrap; }
+.list-link:hover { text-decoration: underline; }
 @media (max-width: 760px) {
   .pub-year { grid-template-columns: 1fr; gap: 6px; }
   .profile { grid-template-columns: 1fr; justify-items: start; gap: 18px; }

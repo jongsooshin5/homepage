@@ -187,7 +187,7 @@ window.PAPER_DETAILS = {
   ]
  },
  "a13": {
-  "ref": "Pathirana, G., Oh, J.-H., Cai, W., An, S.-I., Min, S.-K., Jo, S.-Y., <b>Shin, J.</b>, &amp; Kug, J.-S. (2023). Increase in convective extreme El Niño events in a CO 2 removal scenario. <i>Science Advances</i>, 9(25), eadh2412. <a href=\"https://doi.org/10.1126/sciadv.adh2412\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1126/sciadv.adh2412</a>",
+  "ref": "Pathirana, G., Oh, J.-H., Cai, W., An, S.-I., Min, S.-K., Jo, S.-Y., <b>Shin, J.</b>, &amp; Kug, J.-S. (2023). Increase in convective extreme El Niño events in a CO₂ removal scenario. <i>Science Advances</i>, 9(25), eadh2412. <a href=\"https://doi.org/10.1126/sciadv.adh2412\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1126/sciadv.adh2412</a>",
   "license": "CC BY-NC 4.0",
   "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
   "kp_en": [
@@ -207,7 +207,7 @@ window.PAPER_DETAILS = {
   "fig_caption": "Nonlinear characteristics of model CEE and changes in occurrences."
  },
  "a14": {
-  "ref": "Kim, S.-Y., Choi, Y.-J., Son, S.-W., Grise, K. M., Staten, P. W., An, S.-I., Yeh, S.-W., Kug, J.-S., Min, S.-K., &amp; <b>Shin, J.</b> (2023). Hemispherically asymmetric Hadley cell response to CO 2 removal. <i>Science Advances</i>, 9(30), eadg1801. <a href=\"https://doi.org/10.1126/sciadv.adg1801\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1126/sciadv.adg1801</a>",
+  "ref": "Kim, S.-Y., Choi, Y.-J., Son, S.-W., Grise, K. M., Staten, P. W., An, S.-I., Yeh, S.-W., Kug, J.-S., Min, S.-K., &amp; <b>Shin, J.</b> (2023). Hemispherically asymmetric Hadley cell response to CO₂ removal. <i>Science Advances</i>, 9(30), eadg1801. <a href=\"https://doi.org/10.1126/sciadv.adg1801\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1126/sciadv.adg1801</a>",
   "license": "CC BY-NC 4.0",
   "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
   "kp_en": [
@@ -302,7 +302,7 @@ window.PAPER_DETAILS = {
   "fig_caption": "Observed temperature trends during the winters of 1995/96-2021/22."
  },
  "a19": {
-  "ref": "Liu, C., An, S.-I., Jin, F.-F., <b>Shin, J.</b>, Kug, J.-S., Zhang, W., Stuecker, M. F., Yuan, X., Xue, A., Geng, X., &amp; Kim, S.-K. (2023). Hysteresis of the El Niño–Southern Oscillation to CO 2 forcing. <i>Science Advances</i>, 9(31), eadh8442. <a href=\"https://doi.org/10.1126/sciadv.adh8442\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1126/sciadv.adh8442</a>",
+  "ref": "Liu, C., An, S.-I., Jin, F.-F., <b>Shin, J.</b>, Kug, J.-S., Zhang, W., Stuecker, M. F., Yuan, X., Xue, A., Geng, X., &amp; Kim, S.-K. (2023). Hysteresis of the El Niño–Southern Oscillation to CO₂ forcing. <i>Science Advances</i>, 9(31), eadh8442. <a href=\"https://doi.org/10.1126/sciadv.adh8442\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1126/sciadv.adh8442</a>",
   "license": "CC BY-NC 4.0",
   "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
   "kp_en": [
@@ -512,7 +512,7 @@ window.PAPER_DETAILS = {
   "fig_caption": "Asymmetry of ecosystems and climate over Europe from CDRMIP."
  },
  "a30": {
-  "ref": "Li, Z.-B., Liu, C., Azorin-Molina, C., An, S.-I., Zhao, Y., Xu, Y., <b>Shin, J.</b>, Chen, D., &amp; Shen, C. (2025). Asymmetric response of Northern Hemisphere near-surface wind speed to CO 2 removal. <i>Weather and Climate Dynamics</i>, 6(4), 1107–1117. <a href=\"https://doi.org/10.5194/wcd-6-1107-2025\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.5194/wcd-6-1107-2025</a>",
+  "ref": "Li, Z.-B., Liu, C., Azorin-Molina, C., An, S.-I., Zhao, Y., Xu, Y., <b>Shin, J.</b>, Chen, D., &amp; Shen, C. (2025). Asymmetric response of Northern Hemisphere near-surface wind speed to CO₂ removal. <i>Weather and Climate Dynamics</i>, 6(4), 1107–1117. <a href=\"https://doi.org/10.5194/wcd-6-1107-2025\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.5194/wcd-6-1107-2025</a>",
   "license": "CC BY 4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
   "kp_en": [
@@ -647,7 +647,7 @@ window.PAPER_DETAILS = {
   "fig_caption": "Temporal evolution and hysteresis behavior of the surface temperature from CMIP6 CDRMIP models."
  },
  "b3": {
-  "ref": "An, S.-I., Shin, S.-H., Liu, C., Yeh, S.-W., Min, S.-K., Son, S.-W., Kug, J.-S., &amp; Park, J.-H. (2024). Asymmetric ENSO teleconnections in a symmetric CO 2 concentration pathway. <i>Environmental Research Letters</i>, 19(12), 124028. <a href=\"https://doi.org/10.1088/1748-9326/ad7b5c\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1088/1748-9326/ad7b5c</a>",
+  "ref": "An, S.-I., Shin, S.-H., Liu, C., Yeh, S.-W., Min, S.-K., Son, S.-W., Kug, J.-S., &amp; Park, J.-H. (2024). Asymmetric ENSO teleconnections in a symmetric CO₂ concentration pathway. <i>Environmental Research Letters</i>, 19(12), 124028. <a href=\"https://doi.org/10.1088/1748-9326/ad7b5c\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1088/1748-9326/ad7b5c</a>",
   "license": "CC BY 4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
   "kp_en": [
@@ -727,7 +727,7 @@ window.PAPER_DETAILS = {
   "fig_caption": "Sea level response in the SPNA."
  },
  "b7": {
-  "ref": "Iwakiri, T., Kug, J.-S., Jin, F.-F., Zhao, S., An, S.-I., Kim, G.-I., &amp; Park, D. (2025). Abrupt shift of El Niño periodicity under CO 2 mitigation. <i>Proceedings of the National Academy of Sciences</i>, 122(25), e2426048122. <a href=\"https://doi.org/10.1073/pnas.2426048122\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1073/pnas.2426048122</a>",
+  "ref": "Iwakiri, T., Kug, J.-S., Jin, F.-F., Zhao, S., An, S.-I., Kim, G.-I., &amp; Park, D. (2025). Abrupt shift of El Niño periodicity under CO₂ mitigation. <i>Proceedings of the National Academy of Sciences</i>, 122(25), e2426048122. <a href=\"https://doi.org/10.1073/pnas.2426048122\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1073/pnas.2426048122</a>",
   "license": "CC BY-NC-ND 4.0",
   "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
   "kp_en": [
@@ -747,7 +747,7 @@ window.PAPER_DETAILS = {
   "fig_caption": "Periodicity shift of El Niño in CO₂ mitigation."
  },
  "b8": {
-  "ref": "Cajada, M. I., Son, S.-W., Hwang, J., Park, H.-S., &amp; An, S.-I. (2025). Regionally‐Dependent Arctic Sea Ice Recovery to CO 2 Removal. <i>Earth&#x27;s Future</i>, 13(6), e2024EF005597. <a href=\"https://doi.org/10.1029/2024EF005597\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1029/2024EF005597</a>",
+  "ref": "Cajada, M. I., Son, S.-W., Hwang, J., Park, H.-S., &amp; An, S.-I. (2025). Regionally‐Dependent Arctic Sea Ice Recovery to CO₂ Removal. <i>Earth&#x27;s Future</i>, 13(6), e2024EF005597. <a href=\"https://doi.org/10.1029/2024EF005597\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1029/2024EF005597</a>",
   "license": "CC BY-NC-ND 4.0",
   "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
   "kp_en": [
@@ -827,7 +827,7 @@ window.PAPER_DETAILS = {
   "fig_caption": "Design of CO₂ stabilization simulations and their Atlantic Meridional Overturning Circulation (AMOC) response."
  },
  "b12": {
-  "ref": "Shin, Y.-R., Seo, K.-H., Kug, J.-S., Kosaka, Y., Yeh, S.-W., Ham, Y.-G., Son, J.-H., &amp; Myeong, H.-J. (2026). Incomplete recovery in compound extreme events under a CO 2 removal scenario. <i>Environmental Research Letters</i>, 21(18), 184005. <a href=\"https://doi.org/10.1088/1748-9326/aea34e\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1088/1748-9326/aea34e</a>",
+  "ref": "Shin, Y.-R., Seo, K.-H., Kug, J.-S., Kosaka, Y., Yeh, S.-W., Ham, Y.-G., Son, J.-H., &amp; Myeong, H.-J. (2026). Incomplete recovery in compound extreme events under a CO₂ removal scenario. <i>Environmental Research Letters</i>, 21(18), 184005. <a href=\"https://doi.org/10.1088/1748-9326/aea34e\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1088/1748-9326/aea34e</a>",
   "license": "CC BY 4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
   "kp_en": [
@@ -847,7 +847,7 @@ window.PAPER_DETAILS = {
   "fig_caption": "Annual global mean anomalies in precipitation (PR; blue; mm d⁻¹), surface air temperature (SAT; red; K), wind speed (WS; yellow; m s⁻¹), together with atmospheric CO₂ concentration (black; ppm) from 2001 to 2300."
  },
  "b13": {
-  "ref": "Cajada, M. I., Son, S.-W., Jun, Y.-J., Simon Wang, S.-Y., Yoon, J.-H., &amp; Min, S.-K. (2026). Reversal of the warm Arctic–cold Eurasia intraseasonal coupling by CO 2 removal. <i>Environmental Research Letters</i>, 21(11), 114005. <a href=\"https://doi.org/10.1088/1748-9326/ae6dd7\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1088/1748-9326/ae6dd7</a>",
+  "ref": "Cajada, M. I., Son, S.-W., Jun, Y.-J., Simon Wang, S.-Y., Yoon, J.-H., &amp; Min, S.-K. (2026). Reversal of the warm Arctic–cold Eurasia intraseasonal coupling by CO₂ removal. <i>Environmental Research Letters</i>, 21(11), 114005. <a href=\"https://doi.org/10.1088/1748-9326/ae6dd7\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1088/1748-9326/ae6dd7</a>",
   "license": "CC BY 4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
   "kp_en": [
@@ -1102,7 +1102,7 @@ window.PAPER_DETAILS = {
   "fig_caption": "Spatial pattern of the mean (a)–(b) SPEI-12, (c)–(d) SPI-12, and (e)–(f) SMI-12 for the (a), (c), and (e) CO₂-up (2029–2089) and (b), (d), and (f) CO₂-down (2125–2185) phases."
  },
  "c9": {
-  "ref": "Lee, D.-G., Kwon, E. Y., Kam, J., &amp; Kug, J.-S. (2025). Irreversible phytoplankton community shifts over Subpolar North Atlantic in response to CO 2 forcing. <i>Earth System Dynamics</i>, 16(6), 2101–2111. <a href=\"https://doi.org/10.5194/esd-16-2101-2025\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.5194/esd-16-2101-2025</a>",
+  "ref": "Lee, D.-G., Kwon, E. Y., Kam, J., &amp; Kug, J.-S. (2025). Irreversible phytoplankton community shifts over Subpolar North Atlantic in response to CO₂ forcing. <i>Earth System Dynamics</i>, 16(6), 2101–2111. <a href=\"https://doi.org/10.5194/esd-16-2101-2025\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.5194/esd-16-2101-2025</a>",
   "license": "CC BY 4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
   "kp_en": [
@@ -1142,7 +1142,7 @@ window.PAPER_DETAILS = {
   "fig_caption": "Evolution of the land and ocean temperature and precipitation under the zero emissions (ZE) and the negative emissions (NE) scenarios."
  },
  "c11": {
-  "ref": "Kim, Y., Min, S.-K., An, S.-I., Paik, S., &amp; Mondal, S. K. (2026). Responses of extreme fire weather to CO 2 emission reductions and underlying mechanisms. <i>Science Advances</i>, 12(2), eadw4705. <a href=\"https://doi.org/10.1126/sciadv.adw4705\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1126/sciadv.adw4705</a>",
+  "ref": "Kim, Y., Min, S.-K., An, S.-I., Paik, S., &amp; Mondal, S. K. (2026). Responses of extreme fire weather to CO₂ emission reductions and underlying mechanisms. <i>Science Advances</i>, 12(2), eadw4705. <a href=\"https://doi.org/10.1126/sciadv.adw4705\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1126/sciadv.adw4705</a>",
   "license": "CC BY-NC 4.0",
   "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
   "kp_en": [
@@ -1162,7 +1162,7 @@ window.PAPER_DETAILS = {
   "fig_caption": "Temporal and spatial changes in FWI."
  },
  "c12": {
-  "ref": "Paik, S., Kim, D., An, S.-I., Park, S.-E., King, A. D., Min, S.-K., Liu, C., &amp; <b>Shin, J.</b> (2026). Intensification of East Asian summer extreme precipitation under a net-zero anthropogenic CO 2 emission scenario. <i>Science Advances</i>, 12(41), eaec9366. <a href=\"https://doi.org/10.1126/sciadv.aec9366\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1126/sciadv.aec9366</a>",
+  "ref": "Paik, S., Kim, D., An, S.-I., Park, S.-E., King, A. D., Min, S.-K., Liu, C., &amp; <b>Shin, J.</b> (2026). Intensification of East Asian summer extreme precipitation under a net-zero anthropogenic CO₂ emission scenario. <i>Science Advances</i>, 12(41), eaec9366. <a href=\"https://doi.org/10.1126/sciadv.aec9366\" target=\"_blank\" rel=\"noopener\">https://doi.org/10.1126/sciadv.aec9366</a>",
   "license": "CC BY-NC 4.0",
   "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
   "kp_en": [

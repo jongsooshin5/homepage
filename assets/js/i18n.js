@@ -7,7 +7,7 @@
     en: {
       'brand.affil': 'Research Assistant Professor · School of Earth and Environmental Sciences, Seoul National University',
       'role': 'Research Assistant Professor', 'affil': 'School of Earth and Environmental Sciences, Seoul National University',
-      'intro.more': 'More about me', 'ri.title': 'Research Interests',
+      'intro.more': 'More about me', 'ri.title': 'Research Interests', 'paperlist': '(paper list)',
       'stat.pubs': 'Publications', 'stat.cdr': 'CDR', 'stat.nz': 'Net-Zero', 'stat.ns': 'Nature & Science family journals',
       'cesm1.no': 'Experiment I', 'cesm1.meta': '· run by Jongsoo Shin',
       'cesm2.no': 'Experiment II', 'cesm2.meta': '· Yonsei University',
@@ -34,12 +34,17 @@
       'map.fail': 'The map could not be drawn in this browser.',
       'path.up': 'ramp-up', 'path.down': 'ramp-down',
       'path.nz': 'net zero', 'path.nn': 'net negative',
+      'cite.sum': 'How to cite & acknowledge this experiment', 'cite.ref': 'Cite the experiment paper where you describe the experiment (e.g., Methods)',
+      'cite.ack': 'Copy one of these into your Acknowledgments, unchanged',
+      'cite.a': 'A · With NRF funding', 'cite.b': 'B · Without NRF funding',
+      'cite.copy': 'Copy', 'cite.copied': 'Copied',
+      'cite.note': 'Version A is recommended; Version B may be used if listing the NRF grant would affect how funding contributions are counted for your paper. Acknowledge your own funding separately. When your paper is published, please send the DOI to jongsooshin5@gmail.com so it can be added to this map.',
       'foot.updated': 'Last updated'
     },
     ko: {
       'brand.affil': '연구조교수 · 서울대학교 지구환경과학부',
       'role': '연구조교수', 'affil': '서울대학교 지구환경과학부',
-      'intro.more': '자세한 소개', 'ri.title': '연구 분야',
+      'intro.more': '자세한 소개', 'ri.title': '연구 분야', 'paperlist': '(논문 목록)',
       'stat.pubs': '논문', 'stat.cdr': 'CDR', 'stat.nz': '탄소중립', 'stat.ns': 'Nature·Science 자매지',
       'cesm1.no': '실험 I', 'cesm1.meta': '· 신종수 수행',
       'cesm2.no': '실험 II', 'cesm2.meta': '· 연세대학교',
@@ -66,6 +71,11 @@
       'map.fail': '이 브라우저에서는 지도를 그릴 수 없습니다.',
       'path.up': '증가', 'path.down': '감소',
       'path.nz': '탄소중립', 'path.nn': '순배출음수',
+      'cite.sum': '이 실험을 인용하고 사사하는 방법', 'cite.ref': '실험 논문은 실험을 설명하는 부분(예: Methods)에서 인용해 주세요',
+      'cite.ack': '사사(Acknowledgments)에는 아래 문구 중 하나를 고치지 말고 그대로 넣어 주세요',
+      'cite.a': 'A · NRF 포함', 'cite.b': 'B · NRF 없음',
+      'cite.copy': '복사', 'cite.copied': '복사됨',
+      'cite.note': '버전 A를 권장합니다. NRF 과제를 함께 적으면 본인 과제의 기여도 산정에 문제가 생길 수 있는 경우에는 버전 B를 써도 됩니다. 본인 연구비 사사는 따로 적어 주세요. 논문이 출판되면 DOI를 jongsooshin5@gmail.com으로 보내 주세요. 이 지도에 추가하겠습니다.',
       'foot.updated': '최종 수정'
     }
   };

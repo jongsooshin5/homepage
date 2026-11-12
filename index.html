@@ -37,9 +37,9 @@
     <!-- 숫자는 research/verify_site.py 가 지도 데이터·논문 목록과 맞는지 확인한다 -->
     <ul class="intro-stats" aria-label="Publication counts">
       <li><a href="publications.html"><span data-i18n="stat.pubs">Publications</span> <b data-stat="pubs">38</b></a></li>
-      <li><a href="#cesm1"><span data-i18n="stat.cdr">CDR</span> <b data-stat="cdr">32</b></a></li>
-      <li><a href="#cesm2"><span data-i18n="stat.nz">Net-Zero</span> <b data-stat="nz">3</b></a></li>
-      <li><a href="publications.html"><span data-i18n="stat.ns">Nature &amp; Science family journals</span> <b data-stat="ns">13</b></a></li>
+      <li><a href="pubs-cdr.html"><span data-i18n="stat.cdr">CDR</span> <b data-stat="cdr">32</b></a></li>
+      <li><a href="pubs-netzero.html"><span data-i18n="stat.nz">Net-Zero</span> <b data-stat="nz">3</b></a></li>
+      <li><a href="pubs-nature-science.html"><span data-i18n="stat.ns">Nature &amp; Science family journals</span> <b data-stat="ns">13</b></a></li>
     </ul>
   </section>
 
@@ -51,7 +51,7 @@
         <div>
           <p class="exp-no"><span data-i18n="cesm1.no">Experiment I</span> <span class="exp-meta" data-i18n="cesm1.meta">· run by Jongsoo Shin</span></p>
           <h2 id="cesm1-t" data-i18n="cesm1.title">CESM1-CDR Experiment</h2>
-          <p class="plate-sub" data-i18n="cesm1.sub">To understand the irreversibility and hysteresis of the climate system in response to ramp-up and ramp-down CO₂ concentrations.</p>
+          <p class="plate-sub"><span data-i18n="cesm1.sub">To understand the irreversibility and hysteresis of the climate system in response to ramp-up and ramp-down CO₂ concentrations.</span> <a class="list-link" href="map-cesm1.html" data-i18n="paperlist">(paper list)</a></p>
         </div>
       </div>
       <div class="key">
@@ -83,6 +83,24 @@
       <div class="sheet-head"><h3></h3><button class="sheet-close" type="button"><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg><span data-i18n="map.close">Close</span></button></div>
       <ol></ol>
     </div>
+    <!-- 사사 문구는 acknowledgment.md 와 글자 단위로 같아야 한다(research/verify_site.py 가 확인) -->
+    <details class="cite" id="cite-cesm1">
+      <summary data-i18n="cite.sum">How to cite &amp; acknowledge this experiment</summary>
+      <div class="cite-body">
+        <p class="cite-h" data-i18n="cite.ref">Cite the experiment paper where you describe the experiment (e.g., Methods)</p>
+        <p class="cite-ref" lang="en">An, S.-I., Shin, J., Yeh, S.-W., Son, S.-W., Kug, J.-S., Min, S.-K., &amp; Kim, H.-J. (2021). Global cooling hiatus driven by an AMOC overshoot in a carbon dioxide removal scenario. <i>Earth's Future</i>, 9(7), e2021EF002165. <a href="https://doi.org/10.1029/2021EF002165">https://doi.org/10.1029/2021EF002165</a></p>
+        <p class="cite-h" data-i18n="cite.ack">Copy one of these into your Acknowledgments, unchanged</p>
+        <div class="ack" data-ack="a">
+          <div class="ack-head"><span data-i18n="cite.a">A · With NRF funding</span><button class="ack-copy" type="button" data-i18n="cite.copy">Copy</button></div>
+          <p lang="en">The CESM1-CDR experiment was designed by the Irreversible Climate Change Research Center (IRCC), Yonsei University, supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (MSIT) (NRF-2018R1A5A1024958), and the simulations were performed by Jongsoo Shin. The simulations were carried out on the supercomputers of the National Center for Meteorological Supercomputer of the Korea Meteorological Administration (KMA) and the KISTI National Supercomputing Center with supercomputing resources including technical support (KSC-2019-CHA-0005), and the data were transferred through the Korea Research Environment Open NETwork (KREONET).</p>
+        </div>
+        <div class="ack" data-ack="b">
+          <div class="ack-head"><span data-i18n="cite.b">B · Without NRF funding</span><button class="ack-copy" type="button" data-i18n="cite.copy">Copy</button></div>
+          <p lang="en">The CESM1-CDR experiment was designed by the Irreversible Climate Change Research Center (IRCC), Yonsei University, and the simulations were performed by Jongsoo Shin. The simulations were carried out on the supercomputers of the National Center for Meteorological Supercomputer of the Korea Meteorological Administration (KMA) and the KISTI National Supercomputing Center with supercomputing resources including technical support (KSC-2019-CHA-0005), and the data were transferred through the Korea Research Environment Open NETwork (KREONET).</p>
+        </div>
+        <p class="cite-note" data-i18n="cite.note">Version A is recommended; Version B may be used if listing the NRF grant would affect how funding contributions are counted for your paper. Acknowledge your own funding separately. When your paper is published, please send the DOI to jongsooshin5@gmail.com so it can be added to this map.</p>
+      </div>
+    </details>
   </section>
 
   <section class="plate" id="cesm2" aria-labelledby="cesm2-t">
@@ -91,7 +109,7 @@
         <div>
           <p class="exp-no"><span data-i18n="cesm2.no">Experiment II</span> <span class="exp-meta" data-i18n="cesm2.meta">· Yonsei University</span></p>
           <h2 id="cesm2-t" data-i18n="cesm2.title">CESM2 Net-Zero and Net-Negative Experiments</h2>
-          <p class="plate-sub" data-i18n="cesm2.sub">Climate responses and extremes under net-zero and net-negative CO₂ emission pathways.</p>
+          <p class="plate-sub"><span data-i18n="cesm2.sub">Climate responses and extremes under net-zero and net-negative CO₂ emission pathways.</span> <a class="list-link" href="map-cesm2.html" data-i18n="paperlist">(paper list)</a></p>
         </div>
       </div>
       <div class="key">
@@ -121,13 +139,30 @@
       <div class="sheet-head"><h3></h3><button class="sheet-close" type="button"><svg class="x-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg><span data-i18n="map.close">Close</span></button></div>
       <ol></ol>
     </div>
+    <details class="cite" id="cite-cesm2">
+      <summary data-i18n="cite.sum">How to cite &amp; acknowledge this experiment</summary>
+      <div class="cite-body">
+        <p class="cite-h" data-i18n="cite.ref">Cite the experiment paper where you describe the experiment (e.g., Methods)</p>
+        <p class="cite-ref" lang="en">Park, S.-W., Mun, J.-H., Lee, H., Steinert, N. J., An, S.-I., Shin, J., &amp; Kug, J.-S. (2025). Continued permafrost ecosystem carbon loss under net-zero and negative emissions. <i>Science Advances</i>, 11(7), eadn8819. <a href="https://doi.org/10.1126/sciadv.adn8819">https://doi.org/10.1126/sciadv.adn8819</a></p>
+        <p class="cite-h" data-i18n="cite.ack">Copy one of these into your Acknowledgments, unchanged</p>
+        <div class="ack" data-ack="a">
+          <div class="ack-head"><span data-i18n="cite.a">A · With NRF funding</span><button class="ack-copy" type="button" data-i18n="cite.copy">Copy</button></div>
+          <p lang="en">The CESM2 net-zero and net-negative emission experiments were designed by the Irreversible Climate Change Research Center (IRCC), Yonsei University, supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (MSIT) (NRF-2018R1A5A1024958), and the simulations were performed by Ho-Jeong Shin and So-Eun Park. The simulations were carried out on the supercomputers of the National Center for Meteorological Supercomputer of the Korea Meteorological Administration (KMA) and the KISTI National Supercomputing Center with supercomputing resources including technical support (KSC-2021-CHA-0030 and KSC-2022-CHA-0017), and the data were transferred through the Korea Research Environment Open NETwork (KREONET).</p>
+        </div>
+        <div class="ack" data-ack="b">
+          <div class="ack-head"><span data-i18n="cite.b">B · Without NRF funding</span><button class="ack-copy" type="button" data-i18n="cite.copy">Copy</button></div>
+          <p lang="en">The CESM2 net-zero and net-negative emission experiments were designed by the Irreversible Climate Change Research Center (IRCC), Yonsei University, and the simulations were performed by Ho-Jeong Shin and So-Eun Park. The simulations were carried out on the supercomputers of the National Center for Meteorological Supercomputer of the Korea Meteorological Administration (KMA) and the KISTI National Supercomputing Center with supercomputing resources including technical support (KSC-2021-CHA-0030 and KSC-2022-CHA-0017), and the data were transferred through the Korea Research Environment Open NETwork (KREONET).</p>
+        </div>
+        <p class="cite-note" data-i18n="cite.note">Version A is recommended; Version B may be used if listing the NRF grant would affect how funding contributions are counted for your paper. Acknowledge your own funding separately. When your paper is published, please send the DOI to jongsooshin5@gmail.com so it can be added to this map.</p>
+      </div>
+    </details>
   </section>
 </main>
 
 <footer class="foot">
   <span>Jongsoo Shin · <span data-i18n="brand.affil">Research Assistant Professor · School of Earth and Environmental Sciences, Seoul National University</span></span>
   <span>jongsooshin5@gmail.com</span>
-  <span>Map: Natural Earth 1:110m · <span data-i18n="foot.updated">Last updated</span> 2026-11-05</span>
+  <span>Map: Natural Earth 1:110m · <span data-i18n="foot.updated">Last updated</span> 2026-11-12</span>
 </footer>
 
 <script src="assets/vendor/d3-array.min.js"></script>
@@ -137,6 +172,7 @@
 <script src="data/papers.js"></script>
 <script src="data/details.js"></script>
 <script src="assets/js/i18n.js"></script>
+<script src="assets/js/cite.js"></script>
 <script src="assets/js/map.js"></script>
 </body>
 </html>
